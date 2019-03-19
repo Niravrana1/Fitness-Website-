@@ -9,13 +9,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Muli|PT+Sans" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-
-    
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="~/Scripts/parallax.js"></script>
 
@@ -24,7 +21,6 @@
     <style>
         * {
             font-family: 'Montserrat', sans-serif;
-           
         }
 
         html, body {
@@ -34,11 +30,10 @@
 
         .cherry {
             background-color: #F23A2E;
-
         }
 
-        .navbar{
-            color:white;
+        .navbar {
+            color: white;
         }
 
         .nav-icon-grid {
@@ -113,7 +108,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark cherry py-3 ">
             <ul class="navbar-nav">
-                <li class="nav-item ml-5" style="font-size:25px;">iron<b>Muscles</b></li>
+                <li class="nav-item ml-5" style="font-size:25px;">Trainer<b>Tracker</b></li>
             </ul>
             <ul class="navbar-nav mr-auto menu">
                 <li class="nav-item active">
@@ -141,13 +136,13 @@
                     <a class="nav-link" href="#">Contact Us</a>
                 </li>
             </ul>
-           
-        </nav>
-        
-    </div>
 
+        </nav>
+
+    </div>
+    @RenderBody()
     <div class="container body-content">
-        @RenderBody()
+
 
         <hr />
 
@@ -181,7 +176,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <address>
-                                11929 W Airport Blvd,<br/>
+                                11929 W Airport Blvd,<br />
                                 Stafford, TX 77477
                             </address>
                         </div>
@@ -203,14 +198,15 @@
                 </div>
             </div>
             <p class="text-center">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
     </div>
-   
 
-    
+
+
 </body>
 </html>
