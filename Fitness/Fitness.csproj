@@ -196,6 +196,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\active-adult-biceps-416809.jpg" />
+    <Content Include="Images\athlete-barbell-body-1552249.jpg" />
+    <Content Include="Images\balance-beach-blond-hair-1117493.jpg" />
+    <Content Include="Images\endurance-exercise-female-40751.jpg" />
     <Content Include="Images\man-lifting-weights.png" />
     <Content Include="Images\padmasana.png" />
     <Content Include="Images\quaver-outline.png" />
