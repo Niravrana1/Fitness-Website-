@@ -30,5 +30,13 @@ namespace Fitness.Controllers
         {
             return View();
         }
+        public ActionResult signin()
+        {
+            return View();
+        }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
     }
 }

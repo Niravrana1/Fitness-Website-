@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Fitness.Models.Validation;
 
 namespace Fitness.Models.Viewmodel
 {
@@ -21,6 +22,9 @@ namespace Fitness.Models.Viewmodel
         [DataType(DataType.Password)]
         [StringLength(50)]
         public string Password { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
     }
 
     public class Resgisterviewmodel
@@ -35,6 +39,7 @@ namespace Fitness.Models.Viewmodel
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [_18yearandold]
         [Required(ErrorMessage = "Please enter Date of birth")]
         [DisplayFormat(DataFormatString = "{0:mm/dd/yy}")]
         [Column(TypeName = "DateTime2")]
@@ -75,20 +80,20 @@ namespace Fitness.Models.Viewmodel
 
         [Required(ErrorMessage = "PLease enter User name")]
         [StringLength(50)]
-        [Display(Name ="UserName")]
+        [Display(Name = "UserName")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "PLease enter Password")]
         [DataType(DataType.Password)]
         [StringLength(50)]
-        [Display(Name ="Password")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "PLease enter Confirm Password")]
         [DataType(DataType.Password)]
         [StringLength(50)]
         [Compare("Password")]
-        [Display(Name ="Confirm Password")]
+        [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
 
     }

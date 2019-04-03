@@ -20,8 +20,9 @@ namespace Fitness.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        static string DbConnection = (new FitnessEntitiesDbContext()).Database.Connection.ConnectionString; /*This line is very important to get identity behaviour  */
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base(DbConnection, throwIfV1Schema: false)
         {
         }
 

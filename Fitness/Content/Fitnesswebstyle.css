@@ -1,0 +1,83 @@
+﻿* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.cherry {
+    background-color: #F23A2E;
+}
+
+.navbar {
+    color: white;
+}
+
+.nav-icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.icon-iteam-grid {
+    float: left;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /*grid-gap:10px;*/
+    /*grid-template-rows:1fr 1fr;*/
+}
+
+.grid-iteam {
+    float: left;
+}
+
+.icons{
+    list-style-type:none;
+}
+.icons>li{
+    float:right;
+    
+}
+
+@media only screen and (min-width: 600px) {
+    .icons {
+        margin-left: 100px;
+    }
+
+        .icons li {
+            margin-right: 30px;
+        }
+    /* .icons2 {
+                margin-left: 650px;
+
+
+            .menu {
+                margin-left: 600px;
+            }*/
+    .menu > li {
+        margin-right: 30px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    nav li {
+        display: inline-block;
+    }
+}
+
+/*Button Style*/
+.gbutton {
+    width:auto;
+    height:auto;
+    color: white;
+    background-image: linear-gradient(to left, #EB3349 0%, #F45C43 90%, #EB3349 100%)
+}
+
+    .gbutton:hover {
+        color: white;
+        background-position: right;
+    }

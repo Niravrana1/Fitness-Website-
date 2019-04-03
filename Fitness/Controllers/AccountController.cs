@@ -98,10 +98,12 @@ namespace Fitness.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login()
+        public ActionResult Login(LoginViewModel lv)
         {
             return View();
         }
+
+        
 
         //
         // GET: /Account/VerifyCode
