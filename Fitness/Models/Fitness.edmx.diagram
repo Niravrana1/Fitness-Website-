@@ -7,11 +7,32 @@
       <Diagram DiagramId="ad24f9954d7940e59dd4beec5ffbc8b9" Name="Diagram1">
         <EntityTypeShape EntityType="FitnessModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FitnessModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FitnessModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessModel.AspNetUserLogin" Width="1.75" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FitnessModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="FitnessModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="FitnessModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="FitnessModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FitnessModel.Class" Width="1.5" PointX="7.5" PointY="14.875" />
+        <EntityTypeShape EntityType="FitnessModel.Customer" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="FitnessModel.Manager" Width="1.5" PointX="5.25" PointY="10.75" />
+        <EntityTypeShape EntityType="FitnessModel.NotavailableDatetime" Width="1.5" PointX="7.5" PointY="17.75" />
+        <EntityTypeShape EntityType="FitnessModel.ScheduleClass" Width="1.5" PointX="9.75" PointY="12.125" />
+        <EntityTypeShape EntityType="FitnessModel.ScheduleTrainer" Width="1.5" PointX="7.5" PointY="11.125" />
+        <EntityTypeShape EntityType="FitnessModel.Trainerrate" Width="1.5" PointX="7.5" PointY="20.75" />
+        <EntityTypeShape EntityType="FitnessModel.Trainer" Width="1.5" PointX="5.25" PointY="16.625" />
+        <AssociationConnector Association="FitnessModel.FK__Customers__useri__49C3F6B7" />
+        <AssociationConnector Association="FitnessModel.FK__Manager__userid__4F7CD00D" />
+        <AssociationConnector Association="FitnessModel.FK__Trainers__userid__4CA06362" />
+        <AssociationConnector Association="FitnessModel.FK__Classes__Trainer__5812160E" />
+        <AssociationConnector Association="FitnessModel.FK__ScheduleC__class__628FA481" />
+        <AssociationConnector Association="FitnessModel.FK__ScheduleC__UserI__60A75C0F" />
+        <AssociationConnector Association="FitnessModel.FK__ScheduleT__UserI__5CD6CB2B" />
+        <AssociationConnector Association="FitnessModel.FK__Notavaila__Train__52593CB8" />
+        <AssociationConnector Association="FitnessModel.FK__ScheduleC__Train__619B8048" />
+        <AssociationConnector Association="FitnessModel.FK__ScheduleT__Train__5DCAEF64" />
+        <AssociationConnector Association="FitnessModel.FK__Trainerra__train__5535A963" />
+        <EntityTypeShape EntityType="FitnessModel.ClassTime" Width="1.5" PointX="9.75" PointY="16.125" />
+        <AssociationConnector Association="FitnessModel.FK__ClassTime__Class__656C112C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

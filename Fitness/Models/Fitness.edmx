@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FitnessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FitnessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,6 +56,249 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Trainerid" Type="int" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ClassPrice" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Fitness.dbo.ClassTime' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ClassTime">
+          <Property Name="Classid" Type="int" />
+          <Property Name="ClassDate" Type="date" />
+          <Property Name="ClassTime" Type="time" Precision="7" />
+        </EntityType>-->
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CId" Type="nvarchar" MaxLength="11" StoreGeneratedPattern="Computed" />
+          <Property Name="userid" Type="nvarchar" MaxLength="128" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="activationcode" Type="uniqueidentifier" />
+          <Property Name="StreetAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" />
+          <Property Name="ZipCode" Type="int" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="ManagerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mid" Type="nvarchar" MaxLength="11" StoreGeneratedPattern="Computed" />
+          <Property Name="userid" Type="nvarchar" MaxLength="128" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="activationcode" Type="uniqueidentifier" />
+          <Property Name="StreetAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" />
+          <Property Name="ZipCode" Type="int" />
+        </EntityType>
+        <EntityType Name="NotavailableDatetime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrainerId" Type="int" />
+          <Property Name="NotavailableDate" Type="date" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="Endtime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="ScheduleClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TrainerId" Type="int" />
+          <Property Name="classid" Type="int" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ScheduleDate" Type="date" />
+          <Property Name="ScheduleTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="ScheduleTrainer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TrainerId" Type="int" />
+          <Property Name="duration" Type="int" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ScheduleDate" Type="date" />
+          <Property Name="ScheduleTime" Type="time" Precision="7" />
+          <Property Name="AppointmentStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Trainerrate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="trainerid" Type="int" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Trainers">
+          <Key>
+            <PropertyRef Name="TrainerId" />
+          </Key>
+          <Property Name="TrainerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tid" Type="nvarchar" MaxLength="11" StoreGeneratedPattern="Computed" />
+          <Property Name="userid" Type="nvarchar" MaxLength="128" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="activationcode" Type="uniqueidentifier" />
+          <Property Name="StreetAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" />
+          <Property Name="ZipCode" Type="int" />
+        </EntityType>
+        <Association Name="FK__Classes__Trainer__5812160E">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="Classes">
+              <PropertyRef Name="Trainerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__ClassTime__Class__59FA5E80" />-->
+        <Association Name="FK__Customers__useri__49C3F6B7">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manager__userid__4F7CD00D">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notavaila__Train__52593CB8">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="NotavailableDatetime" Type="Self.NotavailableDatetime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="NotavailableDatetime">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__class__628FA481">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="0..1" />
+          <End Role="ScheduleClass" Type="Self.ScheduleClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="ScheduleClass">
+              <PropertyRef Name="classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__Train__619B8048">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="ScheduleClass" Type="Self.ScheduleClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="ScheduleClass">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__UserI__60A75C0F">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="ScheduleClass" Type="Self.ScheduleClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ScheduleClass">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleT__Train__5DCAEF64">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="ScheduleTrainer" Type="Self.ScheduleTrainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="ScheduleTrainer">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleT__UserI__5CD6CB2B">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="ScheduleTrainer" Type="Self.ScheduleTrainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ScheduleTrainer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trainerra__train__5535A963">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="Trainerrate" Type="Self.Trainerrate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="Trainerrate">
+              <PropertyRef Name="trainerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trainers__userid__4CA06362">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainers">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -118,6 +361,58 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotavailableDatetime" EntityType="Self.NotavailableDatetime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleClass" EntityType="Self.ScheduleClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleTrainer" EntityType="Self.ScheduleTrainer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainerrate" EntityType="Self.Trainerrate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainers" EntityType="Self.Trainers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Classes__Trainer__5812160E" Association="Self.FK__Classes__Trainer__5812160E">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="Classes" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__useri__49C3F6B7" Association="Self.FK__Customers__useri__49C3F6B7">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manager__userid__4F7CD00D" Association="Self.FK__Manager__userid__4F7CD00D">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notavaila__Train__52593CB8" Association="Self.FK__Notavaila__Train__52593CB8">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="NotavailableDatetime" EntitySet="NotavailableDatetime" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__class__628FA481" Association="Self.FK__ScheduleC__class__628FA481">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ScheduleClass" EntitySet="ScheduleClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__Train__619B8048" Association="Self.FK__ScheduleC__Train__619B8048">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="ScheduleClass" EntitySet="ScheduleClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__UserI__60A75C0F" Association="Self.FK__ScheduleC__UserI__60A75C0F">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ScheduleClass" EntitySet="ScheduleClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleT__Train__5DCAEF64" Association="Self.FK__ScheduleT__Train__5DCAEF64">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="ScheduleTrainer" EntitySet="ScheduleTrainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleT__UserI__5CD6CB2B" Association="Self.FK__ScheduleT__UserI__5CD6CB2B">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="ScheduleTrainer" EntitySet="ScheduleTrainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trainerra__train__5535A963" Association="Self.FK__Trainerra__train__5535A963">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="Trainerrate" EntitySet="Trainerrate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trainers__userid__4CA06362" Association="Self.FK__Trainers__userid__4CA06362">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Trainers" EntitySet="Trainers" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -135,8 +430,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FitnessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -188,6 +482,9 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Customers" Relationship="FitnessModel.FK__Customers__useri__49C3F6B7" FromRole="AspNetUser" ToRole="Customer" />
+          <NavigationProperty Name="Managers" Relationship="FitnessModel.FK__Manager__userid__4F7CD00D" FromRole="AspNetUser" ToRole="Manager" />
+          <NavigationProperty Name="Trainers" Relationship="FitnessModel.FK__Trainers__userid__4CA06362" FromRole="AspNetUser" ToRole="Trainer" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -238,7 +535,311 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Classes" EntityType="FitnessModel.Class" />
+          <EntitySet Name="Customers" EntityType="FitnessModel.Customer" />
+          <EntitySet Name="Managers" EntityType="FitnessModel.Manager" />
+          <EntitySet Name="NotavailableDatetimes" EntityType="FitnessModel.NotavailableDatetime" />
+          <EntitySet Name="ScheduleClasses" EntityType="FitnessModel.ScheduleClass" />
+          <EntitySet Name="ScheduleTrainers" EntityType="FitnessModel.ScheduleTrainer" />
+          <EntitySet Name="Trainerrates" EntityType="FitnessModel.Trainerrate" />
+          <EntitySet Name="Trainers" EntityType="FitnessModel.Trainer" />
+          <AssociationSet Name="FK__Customers__useri__49C3F6B7" Association="FitnessModel.FK__Customers__useri__49C3F6B7">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manager__userid__4F7CD00D" Association="FitnessModel.FK__Manager__userid__4F7CD00D">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Manager" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trainers__userid__4CA06362" Association="FitnessModel.FK__Trainers__userid__4CA06362">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Trainer" EntitySet="Trainers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Classes__Trainer__5812160E" Association="FitnessModel.FK__Classes__Trainer__5812160E">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="Class" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__class__628FA481" Association="FitnessModel.FK__ScheduleC__class__628FA481">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="ScheduleClass" EntitySet="ScheduleClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__UserI__60A75C0F" Association="FitnessModel.FK__ScheduleC__UserI__60A75C0F">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ScheduleClass" EntitySet="ScheduleClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleT__UserI__5CD6CB2B" Association="FitnessModel.FK__ScheduleT__UserI__5CD6CB2B">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ScheduleTrainer" EntitySet="ScheduleTrainers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notavaila__Train__52593CB8" Association="FitnessModel.FK__Notavaila__Train__52593CB8">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="NotavailableDatetime" EntitySet="NotavailableDatetimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleC__Train__619B8048" Association="FitnessModel.FK__ScheduleC__Train__619B8048">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="ScheduleClass" EntitySet="ScheduleClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ScheduleT__Train__5DCAEF64" Association="FitnessModel.FK__ScheduleT__Train__5DCAEF64">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="ScheduleTrainer" EntitySet="ScheduleTrainers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trainerra__train__5535A963" Association="FitnessModel.FK__Trainerra__train__5535A963">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="Trainerrate" EntitySet="Trainerrates" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Trainerid" Type="Int32" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClassPrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__Classes__Trainer__5812160E" FromRole="Class" ToRole="Trainer" />
+          <NavigationProperty Name="ScheduleClasses" Relationship="FitnessModel.FK__ScheduleC__class__628FA481" FromRole="Class" ToRole="ScheduleClass" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CId" Type="String" MaxLength="11" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="userid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="activationcode" Type="Guid" />
+          <Property Name="StreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="FitnessModel.FK__Customers__useri__49C3F6B7" FromRole="Customer" ToRole="AspNetUser" />
+          <NavigationProperty Name="ScheduleClasses" Relationship="FitnessModel.FK__ScheduleC__UserI__60A75C0F" FromRole="Customer" ToRole="ScheduleClass" />
+          <NavigationProperty Name="ScheduleTrainers" Relationship="FitnessModel.FK__ScheduleT__UserI__5CD6CB2B" FromRole="Customer" ToRole="ScheduleTrainer" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="ManagerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mid" Type="String" MaxLength="11" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="userid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="activationcode" Type="Guid" />
+          <Property Name="StreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="FitnessModel.FK__Manager__userid__4F7CD00D" FromRole="Manager" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="NotavailableDatetime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrainerId" Type="Int32" />
+          <Property Name="NotavailableDate" Type="DateTime" Precision="0" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="Endtime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__Notavaila__Train__52593CB8" FromRole="NotavailableDatetime" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="ScheduleClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TrainerId" Type="Int32" />
+          <Property Name="classid" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="0" />
+          <Property Name="ScheduleTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="Class" Relationship="FitnessModel.FK__ScheduleC__class__628FA481" FromRole="ScheduleClass" ToRole="Class" />
+          <NavigationProperty Name="Customer" Relationship="FitnessModel.FK__ScheduleC__UserI__60A75C0F" FromRole="ScheduleClass" ToRole="Customer" />
+          <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__ScheduleC__Train__619B8048" FromRole="ScheduleClass" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="ScheduleTrainer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TrainerId" Type="Int32" />
+          <Property Name="duration" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="0" />
+          <Property Name="ScheduleTime" Type="Time" Precision="7" />
+          <Property Name="AppointmentStatus" Type="Boolean" />
+          <NavigationProperty Name="Customer" Relationship="FitnessModel.FK__ScheduleT__UserI__5CD6CB2B" FromRole="ScheduleTrainer" ToRole="Customer" />
+          <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__ScheduleT__Train__5DCAEF64" FromRole="ScheduleTrainer" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="Trainerrate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trainerid" Type="Int32" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__Trainerra__train__5535A963" FromRole="Trainerrate" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="TrainerId" />
+          </Key>
+          <Property Name="TrainerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tid" Type="String" MaxLength="11" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="userid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="activationcode" Type="Guid" />
+          <Property Name="StreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="FitnessModel.FK__Trainers__userid__4CA06362" FromRole="Trainer" ToRole="AspNetUser" />
+          <NavigationProperty Name="Classes" Relationship="FitnessModel.FK__Classes__Trainer__5812160E" FromRole="Trainer" ToRole="Class" />
+          <NavigationProperty Name="NotavailableDatetimes" Relationship="FitnessModel.FK__Notavaila__Train__52593CB8" FromRole="Trainer" ToRole="NotavailableDatetime" />
+          <NavigationProperty Name="ScheduleClasses" Relationship="FitnessModel.FK__ScheduleC__Train__619B8048" FromRole="Trainer" ToRole="ScheduleClass" />
+          <NavigationProperty Name="ScheduleTrainers" Relationship="FitnessModel.FK__ScheduleT__Train__5DCAEF64" FromRole="Trainer" ToRole="ScheduleTrainer" />
+          <NavigationProperty Name="Trainerrates" Relationship="FitnessModel.FK__Trainerra__train__5535A963" FromRole="Trainer" ToRole="Trainerrate" />
+        </EntityType>
+        <Association Name="FK__Customers__useri__49C3F6B7">
+          <End Type="FitnessModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="FitnessModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manager__userid__4F7CD00D">
+          <End Type="FitnessModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="FitnessModel.Manager" Role="Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trainers__userid__4CA06362">
+          <End Type="FitnessModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="FitnessModel.Trainer" Role="Trainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainer">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Classes__Trainer__5812160E">
+          <End Type="FitnessModel.Trainer" Role="Trainer" Multiplicity="0..1" />
+          <End Type="FitnessModel.Class" Role="Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Trainerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__class__628FA481">
+          <End Type="FitnessModel.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="FitnessModel.ScheduleClass" Role="ScheduleClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="ScheduleClass">
+              <PropertyRef Name="classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__UserI__60A75C0F">
+          <End Type="FitnessModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="FitnessModel.ScheduleClass" Role="ScheduleClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ScheduleClass">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleT__UserI__5CD6CB2B">
+          <End Type="FitnessModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="FitnessModel.ScheduleTrainer" Role="ScheduleTrainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ScheduleTrainer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notavaila__Train__52593CB8">
+          <End Type="FitnessModel.Trainer" Role="Trainer" Multiplicity="0..1" />
+          <End Type="FitnessModel.NotavailableDatetime" Role="NotavailableDatetime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="NotavailableDatetime">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleC__Train__619B8048">
+          <End Type="FitnessModel.Trainer" Role="Trainer" Multiplicity="0..1" />
+          <End Type="FitnessModel.ScheduleClass" Role="ScheduleClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="ScheduleClass">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ScheduleT__Train__5DCAEF64">
+          <End Type="FitnessModel.Trainer" Role="Trainer" Multiplicity="0..1" />
+          <End Type="FitnessModel.ScheduleTrainer" Role="ScheduleTrainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="ScheduleTrainer">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trainerra__train__5535A963">
+          <End Type="FitnessModel.Trainer" Role="Trainer" Multiplicity="0..1" />
+          <End Type="FitnessModel.Trainerrate" Role="Trainerrate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="TrainerId" />
+            </Principal>
+            <Dependent Role="Trainerrate">
+              <PropertyRef Name="trainerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -298,6 +899,115 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="FitnessModel.Class">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="ClassPrice" ColumnName="ClassPrice" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Trainerid" ColumnName="Trainerid" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FitnessModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="CId" ColumnName="CId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="FitnessModel.Manager">
+              <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="Mid" ColumnName="Mid" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotavailableDatetimes">
+            <EntityTypeMapping TypeName="FitnessModel.NotavailableDatetime">
+              <MappingFragment StoreEntitySet="NotavailableDatetime">
+                <ScalarProperty Name="Endtime" ColumnName="Endtime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="NotavailableDate" ColumnName="NotavailableDate" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleClasses">
+            <EntityTypeMapping TypeName="FitnessModel.ScheduleClass">
+              <MappingFragment StoreEntitySet="ScheduleClass">
+                <ScalarProperty Name="ScheduleTime" ColumnName="ScheduleTime" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleTrainers">
+            <EntityTypeMapping TypeName="FitnessModel.ScheduleTrainer">
+              <MappingFragment StoreEntitySet="ScheduleTrainer">
+                <ScalarProperty Name="AppointmentStatus" ColumnName="AppointmentStatus" />
+                <ScalarProperty Name="ScheduleTime" ColumnName="ScheduleTime" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainerrates">
+            <EntityTypeMapping TypeName="FitnessModel.Trainerrate">
+              <MappingFragment StoreEntitySet="Trainerrate">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="trainerid" ColumnName="trainerid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainers">
+            <EntityTypeMapping TypeName="FitnessModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainers">
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="Tid" ColumnName="Tid" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

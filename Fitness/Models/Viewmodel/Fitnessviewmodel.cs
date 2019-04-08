@@ -27,7 +27,7 @@ namespace Fitness.Models.Viewmodel
         public bool RememberMe { get; set; }
     }
 
-    public class Resgisterviewmodel
+    public class Signupviewmodel
     {
         [Required(ErrorMessage = "Please enter first name")]
         [StringLength(100)]
@@ -40,7 +40,6 @@ namespace Fitness.Models.Viewmodel
         public string LastName { get; set; }
 
         [_18yearandold]
-        [Required(ErrorMessage = "Please enter Date of birth")]
         [DisplayFormat(DataFormatString = "{0:mm/dd/yy}")]
         [Column(TypeName = "DateTime2")]
         [Display(Name = "Date of birth")]

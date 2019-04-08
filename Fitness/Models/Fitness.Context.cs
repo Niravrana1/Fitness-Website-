@@ -29,5 +29,13 @@ namespace Fitness.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
+        public virtual DbSet<NotavailableDatetime> NotavailableDatetimes { get; set; }
+        public virtual DbSet<ScheduleClass> ScheduleClasses { get; set; }
+        public virtual DbSet<ScheduleTrainer> ScheduleTrainers { get; set; }
+        public virtual DbSet<Trainerrate> Trainerrates { get; set; }
+        public virtual DbSet<Trainer> Trainers { get; set; }
     }
 }

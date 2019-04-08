@@ -24,7 +24,8 @@ namespace Fitness
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-Litera.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/Fitnesswebstyle.css"));
         }
     }
 }
