@@ -232,9 +232,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\active-adult-biceps-416809.jpg" />
     <Content Include="Images\athlete-barbell-body-1552249.jpg" />
+    <Content Include="Images\azamat-zhanisov-1339162-unsplash.jpg" />
     <Content Include="Images\balance-beach-blond-hair-1117493.jpg" />
+    <Content Include="Images\christopher-campbell-28567-unsplash.jpg" />
     <Content Include="Images\emile.jpg" />
     <Content Include="Images\endurance-exercise-female-40751.jpg" />
+    <Content Include="Images\harishan-kobalasingam-1138860-unsplash.jpg" />
     <Content Include="Images\man-lifting-weights.png" />
     <Content Include="Images\matt-.jpg" />
     <Content Include="Images\padmasana.png" />
@@ -351,6 +354,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\signin.cshtml" />
     <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\Trainers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

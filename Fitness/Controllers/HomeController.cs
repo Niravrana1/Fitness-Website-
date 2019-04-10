@@ -38,5 +38,9 @@ namespace Fitness.Controllers
         {
             return View();
         }
+        public ActionResult Trainers()
+        {
+            return View();
+        }
     }
 }
