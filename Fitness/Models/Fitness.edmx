@@ -65,13 +65,15 @@
           <Property Name="ClassName" Type="nvarchar" MaxLength="100" />
           <Property Name="ClassPrice" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Fitness.dbo.ClassTime' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="ClassTime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Classid" Type="int" />
           <Property Name="ClassDate" Type="date" />
           <Property Name="ClassTime" Type="time" Precision="7" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -176,9 +178,18 @@ warning 6013: The table/view 'Fitness.dbo.ClassTime' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__ClassTime__Class__59FA5E80" />-->
+        <Association Name="FK__ClassTime__Class__656C112C">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="0..1" />
+          <End Role="ClassTime" Type="Self.ClassTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="ClassTime">
+              <PropertyRef Name="Classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Customers__useri__49C3F6B7">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
@@ -362,6 +373,7 @@ error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, b
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassTime" EntityType="Self.ClassTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotavailableDatetime" EntityType="Self.NotavailableDatetime" Schema="dbo" store:Type="Tables" />
@@ -372,6 +384,10 @@ error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, b
           <AssociationSet Name="FK__Classes__Trainer__5812160E" Association="Self.FK__Classes__Trainer__5812160E">
             <End Role="Trainers" EntitySet="Trainers" />
             <End Role="Classes" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClassTime__Class__656C112C" Association="Self.FK__ClassTime__Class__656C112C">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassTime" EntitySet="ClassTime" />
           </AssociationSet>
           <AssociationSet Name="FK__Customers__useri__49C3F6B7" Association="Self.FK__Customers__useri__49C3F6B7">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -587,6 +603,11 @@ error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, b
             <End Role="Trainer" EntitySet="Trainers" />
             <End Role="Trainerrate" EntitySet="Trainerrates" />
           </AssociationSet>
+          <EntitySet Name="ClassTimes" EntityType="FitnessModel.ClassTime" />
+          <AssociationSet Name="FK__ClassTime__Class__656C112C" Association="FitnessModel.FK__ClassTime__Class__656C112C">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="ClassTime" EntitySet="ClassTimes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Class">
           <Key>
@@ -598,6 +619,7 @@ error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, b
           <Property Name="ClassPrice" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__Classes__Trainer__5812160E" FromRole="Class" ToRole="Trainer" />
           <NavigationProperty Name="ScheduleClasses" Relationship="FitnessModel.FK__ScheduleC__class__628FA481" FromRole="Class" ToRole="ScheduleClass" />
+          <NavigationProperty Name="ClassTimes" Relationship="FitnessModel.FK__ClassTime__Class__656C112C" FromRole="Class" ToRole="ClassTime" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -840,6 +862,28 @@ error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, b
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ClassTime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Classid" Type="Int32" />
+          <Property Name="ClassDate" Type="DateTime" Precision="0" />
+          <Property Name="ClassTime1" Type="Time" Precision="7" />
+          <NavigationProperty Name="Class" Relationship="FitnessModel.FK__ClassTime__Class__656C112C" FromRole="ClassTime" ToRole="Class" />
+        </EntityType>
+        <Association Name="FK__ClassTime__Class__656C112C">
+          <End Type="FitnessModel.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="FitnessModel.ClassTime" Role="ClassTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="ClassTime">
+              <PropertyRef Name="Classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1005,6 +1049,16 @@ error 6004: The table 'Fitness.dbo.ClassTime' is referenced by a relationship, b
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="Tid" ColumnName="Tid" />
                 <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassTimes">
+            <EntityTypeMapping TypeName="FitnessModel.ClassTime">
+              <MappingFragment StoreEntitySet="ClassTime">
+                <ScalarProperty Name="ClassTime1" ColumnName="ClassTime" />
+                <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
+                <ScalarProperty Name="Classid" ColumnName="Classid" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

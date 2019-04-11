@@ -178,6 +178,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +198,15 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Fitness.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Class.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClassTime.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Fitness.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,7 +223,25 @@
       <DependentUpon>Fitness.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Manager.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NotavailableDatetime.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleClass.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleTrainer.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trainer.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Trainerrate.cs">
+      <DependentUpon>Fitness.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Validation\18yearandold.cs" />
     <Compile Include="Models\Viewmodel\Fitnessviewmodel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -314,8 +343,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -349,11 +376,13 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Home\signin.cshtml" />
-    <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Account\signin.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Admin\AddRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

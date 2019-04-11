@@ -1,0 +1,17 @@
+﻿@model Fitness.Models.AspNetRole
+@{
+    ViewBag.Title = "AddRole";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>AddRole</h2>
+
+@using (Html.BeginForm("AddRole","Admin", FormMethod.Post))
+{
+    <div>
+        <label>Role Name : </label>
+        @Html.TextBoxFor(m => m.Name)
+        <button type="submit" class="btn gbutton" onclick="return confirm('Are you want to add this role?')">Add</button>
+    </div>
+}
+

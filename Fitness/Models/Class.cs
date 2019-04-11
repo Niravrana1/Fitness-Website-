@@ -18,6 +18,7 @@ namespace Fitness.Models
         public Class()
         {
             this.ScheduleClasses = new HashSet<ScheduleClass>();
+            this.ClassTimes = new HashSet<ClassTime>();
         }
     
         public int ClassId { get; set; }
@@ -28,5 +29,7 @@ namespace Fitness.Models
         public virtual Trainer Trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleClass> ScheduleClasses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassTime> ClassTimes { get; set; }
     }
 }

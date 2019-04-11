@@ -37,5 +37,6 @@ namespace Fitness.Models
         public virtual DbSet<ScheduleTrainer> ScheduleTrainers { get; set; }
         public virtual DbSet<Trainerrate> Trainerrates { get; set; }
         public virtual DbSet<Trainer> Trainers { get; set; }
+        public virtual DbSet<ClassTime> ClassTimes { get; set; }
     }
 }

@@ -13,30 +13,57 @@ namespace Fitness.Controllers
             return View();
         }
 
+        //GET: Home/ Find Class
+        [HttpGet]
+        public ActionResult FindClass()
+        {
+            return View();
+        }
+
+        //GET: Home/ Personal Training
+        [HttpGet]
+        public ActionResult PersonalTraining()
+        {
+            // DropdownList
+            //  Book Personal Training Sessions
+            //  booked training sessions
+            //  view Trainers
+            return View();
+        }
+
+        //GET: Home/ Member Area
+        [HttpGet]
+        public ActionResult MemberArea()
+        {
+            return View();
+        }
+        
+        //GET: Home/SocialMedia
+        [HttpGet]
+        public ActionResult SocialMedia()
+        {
+            return View();
+        }
+
+        //GET: Home/About
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        //GET: Home/ ContactUs
+        public ActionResult ContactUs()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
+
+
+
         public ActionResult Practice()
         {
             return View();
         }
-        public ActionResult signin()
-        {
-            return View();
-        }
-        public ActionResult SignUp()
-        {
-            return View();
-        }
+       
     }
 }
