@@ -325,3 +325,7 @@ C:\Users\nirav\OneDrive\Documents\GitHub\Fitness-website\Fitness-Website-\Fitnes
 C:\Users\nirav\OneDrive\Documents\GitHub\Fitness-website\Fitness-Website-\Fitness\obj\Debug\Fitness.csproj.CopyComplete
 C:\Users\nirav\OneDrive\Documents\GitHub\Fitness-website\Fitness-Website-\Fitness\obj\Debug\Fitness.dll
 C:\Users\nirav\OneDrive\Documents\GitHub\Fitness-website\Fitness-Website-\Fitness\obj\Debug\Fitness.pdb
+C:\Users\luis_\OneDrive\Desktop\Fitness-Website-\Fitness-Website-\Fitness\obj\Debug\Fitness.csprojAssemblyReference.cache
+C:\Users\luis_\OneDrive\Desktop\Fitness-Website-\Fitness-Website-\Fitness\obj\Debug\Fitness.csproj.CoreCompileInputs.cache
+C:\Users\luis_\OneDrive\Desktop\Fitness-Website-\Fitness-Website-\Fitness\obj\Debug\Fitness.dll
+C:\Users\luis_\OneDrive\Desktop\Fitness-Website-\Fitness-Website-\Fitness\obj\Debug\Fitness.pdb

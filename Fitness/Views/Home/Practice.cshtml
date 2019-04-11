@@ -20,6 +20,24 @@
         min-height: 500px;
         background: transparent;
     }
+    .outterSection {
+        background: rgba(242, 58, 46, 0.5);
+    }
+    .flip{
+        position:relative;
+        z-index:-2;
+    }
+    .info{
+        position:absolute;
+        color:#fff;
+        width:100%;
+    }
+    .main-container img{
+       width:350px;
+        height:300px;
+    }
+  
+
 </style>
 <div id="demo" class="carousel slide" data-ride="carousel">
 
@@ -55,18 +73,92 @@
     </a>
 
 </div>
-<div class="row">
-    <div class="col-sm-3">
 
-    </div>
-    <div class="col-sm-3">
 
-    </div>
-    <div class="col-sm-3">
+   
+        <div class="container mt-4">
+            <h5 class="text-uppercase text-center mt-5 mb-1">Top Rated</h5><hr style="border:1px solid #F23A2E; width:5%; background-color:#F23A2E; margin-bottom:3em;" />
+            <!--first row of trainers-->
+            <div class="row">
+                <div class=" col-sm-12 col-lg-4 mb-3 d-flex justify-content-center">
+                    <div class="main-container outterSection d-inline-block">
+                        <div class="info d-none">
+                            <p class="text-center mt-5 font-weight-bold">John Doe</p>
+                            <p class="text-center m-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quas iste corporis asperiores placeat earum.</p>
+                            <a href="#" class="btn btn-lg bg-white">Schedule</a>
+                        </div>
+                        <img  src="~/Images/emile.jpg" class="img-fluid" />
+                    </div>
+                </div>
+                <div class=" col-sm-12 col-lg-4 mb-3 d-flex justify-content-center">
+                    <div  class="main-container outterSection d-inline-block">
+                        <div class=" info d-none">
+                            <p class="text-center mt-3 font-weight-bold">Nirav Rana</p>
+                            <a href="#">Hello</a>
+                        </div>
+                        <img  src="~/Images/matt-.jpg" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4 mb-3 d-flex justify-content-center">
+                    <div class="main-container outterSection">
+                        <div class="info d-none">
+                            <p class="text-center mt-3 font-weight-bold">Luis Ramirez</p>
+                            <a href="#">Hello</a>
+                        </div>
+                        <img src="~/Images/emile.jpg" class="img-fluid"/>
+                    </div>
+                </div>
+            </div>
+            <!--Seconf Row of Trainers-->
+            <div class="row">
+                <div class=" col-sm-12 col-lg-4 mb-3 d-flex justify-content-center">
+                    <div class="main-container outterSection d-inline-block">
+                        <div  class="info d-none">
+                            <p>Hello</p>
+                            <a href="#">Hello</a>
+                        </div>
+                        <img  src="~/Images/azamat-zhanisov-1339162-unsplash.jpg" class="img-fluid"/>
+                    </div>
+                </div>
+                <div class=" col-sm-12 col-lg-4 mb-3 d-flex justify-content-center">
+                    <div  class="main-container outterSection d-inline-block">
+                        <div class=" info d-none">
+                            <p>Hello</p>
+                            <a href="#">Hello</a>
+                        </div>
+                        <img  src="~/Images/harishan-kobalasingam-1138860-unsplash.jpg" class="img-fluid" />
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-4 mb-3 d-flex justify-content-center">
+                    <div class="main-container outterSection d-inline-block">
+                        <div class="info d-none">
+                            <p>Hello</p>
+                            <a href="#">Hello</a>
+                        </div>
+                        <img src="~/Images/christopher-campbell-28567-unsplash.jpg" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
 
-    </div>
-    <div class="col-sm-3">
+        </div>
+    
+   <script>
+      
+       //get all elements with the class name main container
+       let colList = document.querySelectorAll('.main-container');
+       // addevent listeners to each element in the list
+       colList.forEach((element) => {
+           //if mouse is over show their information 
+           element.addEventListener('mouseover', () => {
+               element.lastElementChild.classList.add('flip');
+               element.firstElementChild.classList.remove('d-none');
+           });
+           element.addEventListener('mouseout', () => {
+               //if their mouse is not over hidde their information
+               element.lastElementChild.classList.remove('flip');
+               element.firstElementChild.classList.add('d-none');
+           });
+       });
+   </script>
 
-    </div>
-</div>
 
