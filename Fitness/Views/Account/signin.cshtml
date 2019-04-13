@@ -1,4 +1,4 @@
-﻿@model Fitness.Models.Viewmodel.Loginviewmodel
+﻿@model Fitness.Models.Viewmodel.SigninViewmodel
 @{
     ViewBag.Title = "signin";
     Layout = "~/Views/Shared/_HomePage.cshtml";
@@ -6,7 +6,7 @@
 
 
     <div class="row ">
-        @using (Html.BeginForm("Login", "Account",FormMethod.Post,new {@class = "container pt-1" }))
+        @using (Html.BeginForm("Signin","Account",FormMethod.Post,new {@class = "container pt-1" }))
         {
         <div class="container-fluid">
             @Html.AntiForgeryToken()

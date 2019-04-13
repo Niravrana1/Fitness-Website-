@@ -12,7 +12,7 @@ namespace Fitness.Models.Viewmodel
     {
     }
 
-    public class Loginviewmodel
+    public class SigninViewmodel
     {
         [Required(ErrorMessage = "PLease enter User name")]
         [StringLength(50)]
@@ -74,7 +74,7 @@ namespace Fitness.Models.Viewmodel
         public string State { get; set; }
 
         [Required(ErrorMessage = "Please enter ZipCode")]
-        [Display(Name = "City")]
+        [Display(Name = "ZipCode")]
         public int ZipCode { get; set; }
 
         [Required(ErrorMessage = "PLease enter User name")]
@@ -89,7 +89,7 @@ namespace Fitness.Models.Viewmodel
         public string Password { get; set; }
 
         [Required(ErrorMessage = "PLease enter Confirm Password")]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password,ErrorMessage = "Passwords must be at least 6 characters. Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9')")]
         [StringLength(50)]
         [Compare("Password")]
         [Display(Name = "Confirm Password")]

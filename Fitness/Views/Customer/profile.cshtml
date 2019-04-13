@@ -1,0 +1,14 @@
+﻿@model Fitness.Models.Customer
+@{
+    ViewBag.Title = "profile";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<div>
+    <h2>profile</h2>
+    <p>Name : @(Model.FirstName + Model.LastName)</p>
+    <p>Date of birth : @Model.DateOfBirth</p>
+    <p>Email : @Model.AspNetUser.Email</p>
+    <p>Phone Number : @Model.AspNetUser.PhoneNumber</p>
+
+</div>

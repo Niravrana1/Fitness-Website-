@@ -9,17 +9,23 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Fitness.Models;
+using Fitness.Models.Viewmodel;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
 
 namespace Fitness.Controllers
 {
+   
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private FitnessEntitiesDbContext _context;
 
         public AccountController()
         {
+            _context = new FitnessEntitiesDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -53,59 +59,149 @@ namespace Fitness.Controllers
         }
 
 
-       // //GET: /Account/Login
-       //[AllowAnonymous]
-       // public ActionResult Login(string returnUrl)
-       // {
-       //     ViewBag.ReturnUrl = returnUrl;
-       //     return View();
-       // }
+        // //GET: /Account/Login
+        //[AllowAnonymous]
+        // public ActionResult Login(string returnUrl)
+        // {
+        //     ViewBag.ReturnUrl = returnUrl;
+        //     return View();
+        // }
 
-       // //
-       // // POST: /Account/Login
-       // [HttpPost]
-       // [AllowAnonymous]
-       // [ValidateAntiForgeryToken]
-       // public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-       // {
-       //     if (!ModelState.IsValid)
-       //     {
-       //         return View(model);
-       //     }
+        // //
+        // // POST: /Account/Login
+        // [HttpPost]
+        // [AllowAnonymous]
+        // [ValidateAntiForgeryToken]
+        // public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        // {
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return View(model);
+        //     }
 
-       //     // This doesn't count login failures towards account lockout
-       //     // To enable password failures to trigger account lockout, change to shouldLockout: true
-       //     var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-       //     switch (result)
-       //     {
-       //         case SignInStatus.Success:
-       //             return RedirectToLocal(returnUrl);
-       //         case SignInStatus.LockedOut:
-       //             return View("Lockout");
-       //         case SignInStatus.RequiresVerification:
-       //             return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-       //         case SignInStatus.Failure:
-       //         default:
-       //             ModelState.AddModelError("", "Invalid login attempt.");
-       //             return View(model);
-       //     }
-       // }
+        //     // This doesn't count login failures towards account lockout
+        //     // To enable password failures to trigger account lockout, change to shouldLockout: true
+        //     var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //     switch (result)
+        //     {
+        //         case SignInStatus.Success:
+        //             return RedirectToLocal(returnUrl);
+        //         case SignInStatus.LockedOut:
+        //             return View("Lockout");
+        //         case SignInStatus.RequiresVerification:
+        //             return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+        //         case SignInStatus.Failure:
+        //         default:
+        //             ModelState.AddModelError("", "Invalid login attempt.");
+        //             return View(model);
+        //     }
+        // }
 
-       
-        public ActionResult Login(string returnUrl)
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult signin(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-           
             return View();
         }
 
-        public ActionResult signin()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> Signin(SigninViewmodel model, string returnUrl)
         {
-            return View();
+           var Auser =  _context.AspNetUsers.Where(m => m.UserName == model.UserName).SingleOrDefault();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    Session["User"] = Auser.UserName;
+                    Session["UserId"] = Auser.Id;
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult SignUp()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> SignUp(Signupviewmodel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber =model.PhoneNumber };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    Customer c = new Customer();
+                    string uid = _context.AspNetUsers.Where(m => m.UserName == model.UserName).FirstOrDefault().Id;
+                    c.userid = uid;
+                    c.FirstName = model.FirstName;
+                    c.LastName = model.LastName;
+                    c.DateOfBirth = model.DateOfBirth;
+                    c.StreetAddress = model.StreetAddress;
+                    c.City = model.City;
+                    c.State = model.State;
+                    c.ZipCode = model.ZipCode;
+                    _context.Customers.Add(c);
+                    _context.SaveChanges();
+
+
+                
+
+                    // ASPNETUSERROLES require two values(User Id, Role Id)
+
+                    string Id = uid; // Getting userid 
+                    string Name = _context.AspNetRoles.Single(m => m.Name == "Customer").Name; // Role id
+                    string Nameid = _context.AspNetRoles.Single(m => m.Name == "Customer").Id;
+
+
+                    ApplicationDbContext ctx = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(ctx));
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                    if (roleManager.RoleExists(Name))
+                    {
+                        userManager.AddToRole(Id, Name);
+                        ViewBag.Message = "Role assigned successfully !";
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         //[HttpPost]
@@ -410,15 +506,24 @@ namespace Fitness.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        [AllowAnonymous]
+        public ActionResult Signout()
         {
+            FormsAuthentication.SignOut();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
+
+        //
+        // POST: /Account/LogOff
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult LogOff()
+        //{
+        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         //
         // GET: /Account/ExternalLoginFailure

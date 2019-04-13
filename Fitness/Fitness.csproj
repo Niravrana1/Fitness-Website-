@@ -182,6 +182,8 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -379,10 +381,13 @@
     <Content Include="Views\Account\signin.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Admin\AddRole.cshtml" />
+    <Content Include="Views\Customer\Home.cshtml" />
+    <Content Include="Views\Customer\profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Customer\" />
+    <Folder Include="Views\Manager\" />
+    <Folder Include="Views\Trainer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
