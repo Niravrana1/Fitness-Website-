@@ -60,7 +60,7 @@ namespace Fitness.Controllers
 
 
 
-        public ActionResult Practice()
+        public ActionResult Trainer()
         {
             return View();
         }
