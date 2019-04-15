@@ -41,15 +41,23 @@ namespace Fitness.Controllers
         {
             if(ModelState.IsValid)
             {
-               int trainerid = _context.Trainers.Single(m => m.userid == Session["UserId"].ToString()).TrainerId; // Getting trainer id of current loged in trainer
-                NotavailableDatetime na = new NotavailableDatetime();
-                na.TrainerId = trainerid;
-                na.NotavailableDate = notavailable.NotavailableDate;
-                na.StartTime = notavailable.StartTime;
-                na.Endtime = notavailable.Endtime;
-                _context.NotavailableDatetimes.Add(na);
-                _context.SaveChanges();
-                return RedirectToAction("Notavailable","Trainer");
+                if(notavailable.StartTime.Value.Hours < notavailable.Endtime.Value.Hours)
+                {
+                    int trainerid = _context.Trainers.Single(m => m.userid == Session["UserId"].ToString()).TrainerId; // Getting trainer id of current loged in trainer
+                    NotavailableDatetime na = new NotavailableDatetime();
+                    na.TrainerId = trainerid;
+                    na.NotavailableDate = notavailable.NotavailableDate;
+                    na.StartTime = notavailable.StartTime;
+                    na.Endtime = notavailable.Endtime;
+                    _context.NotavailableDatetimes.Add(na);
+                    _context.SaveChanges();
+                    return RedirectToAction("Notavailable", "Trainer");
+                }
+                else
+                {
+                    ModelState.AddModelError("End time must be greater then start time");
+                }
+              
             }
             else
             {

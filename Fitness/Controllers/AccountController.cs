@@ -195,6 +195,7 @@ namespace Fitness.Controllers
                         ViewBag.Message = "Role assigned successfully !";
                     }
 
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
