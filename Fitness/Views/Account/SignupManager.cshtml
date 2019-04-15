@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.DateOfBirth)
-                @Html.TextBoxFor(m => m.DateOfBirth, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.DateOfBirth, "", new { @class = "datepicker" })
                 @Html.ValidationMessageFor(m => m.DateOfBirth)
             </div>
             <div class="form-group">
@@ -78,3 +78,29 @@
         </div>
     }
 </div>
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js">
+
+
+    </script>
+
+    <script>
+
+
+        // (month < 10 ? '0' : '') + month : Because if month is less then 10 then it
+        //                            should display 0 before, e.x :01
+
+        $(function () {
+            $(".datepicker").datepicker({
+                changeYear: true,
+                changeMonth: true,
+                
+                dateFormat: "dd-mm-yy"
+
+            });
+        });
+    </script>
+
+}

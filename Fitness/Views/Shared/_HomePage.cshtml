@@ -20,10 +20,10 @@
 
     @* Icons *@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     @*Website Style Sheet *@
     @*<link href="~/Content/Fitnesswebstyle.css" rel="stylesheet" />*@
-   
+
     </head>
 
 <body>
@@ -143,55 +143,54 @@
 
                     </nav>
                 }
+
+                if (User.IsInRole("Manager"))
+                {
+                    <nav class="navbar navbar-expand-lg navbar-dark cherry py-3 ">
+                        <ul class="navbar-nav">
+                            <li class="nav-item ml-5" style="font-size:25px;">Trainer<b>Tracker</b></li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto menu mr-auto">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="classdropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trainer</a>
+                                <div class="dropdown-menu" aria-labelledby="classdropdown">
+                                    <a class="dropdown-item" href="~/Account/SignupTrainer">Create new Trainer</a>
+                                    <a class="dropdown-item" href="#">Manage accounts</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Account/Signout">Logout</a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                }
+                if (User.IsInRole("Trainer"))
+                {
+                    <nav class="navbar navbar-expand-lg navbar-dark cherry py-3 ">
+                        <ul class="navbar-nav">
+                            <li class="nav-item ml-5" style="font-size:25px;">Trainer<b>Tracker</b></li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto menu mr-auto">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="classdropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Training Session</a>
+                                <div class="dropdown-menu" aria-labelledby="classdropdown">
+                                    <a class="dropdown-item" href="~/Trainer/NotAvailable">Not available time</a>
+                                    <a class="dropdown-item" href="#">Manage accounts</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Account/Signout">Logout</a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                }
             }
-            if (User.IsInRole("Manager"))
-            {
-                <nav class="navbar navbar-expand-lg navbar-dark cherry py-3 ">
-                    <ul class="navbar-nav">
-                        <li class="nav-item ml-5" style="font-size:25px;">Trainer<b>Tracker</b></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto menu mr-auto">
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="classdropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trainer</a>
-                            <div class="dropdown-menu" aria-labelledby="classdropdown">
-                                <a class="dropdown-item" href="~/Account/SignupTrainer">Create new Trainer</a>
-                                <a class="dropdown-item" href="#">Manage accounts</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="~/Account/Signout">Logout</a>
-                        </li>
-                    </ul>
-
-                </nav>
-            }
-            if (User.IsInRole("Trainer"))
-            {
-                <nav class="navbar navbar-expand-lg navbar-dark cherry py-3 ">
-                    <ul class="navbar-nav">
-                        <li class="nav-item ml-5" style="font-size:25px;">Trainer<b>Tracker</b></li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto menu mr-auto">
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="classdropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Training Session</a>
-                            <div class="dropdown-menu" aria-labelledby="classdropdown">
-                                <a class="dropdown-item" href="~/Trainer/NotAvailable">Not available time</a>
-                                <a class="dropdown-item" href="#">Manage accounts</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="~/Account/Signout">Logout</a>
-                        </li>
-                    </ul>
-
-                </nav>
-            }
-
-
             else
             {
                 <nav class="navbar navbar-expand-lg navbar-dark cherry py-3 ">
@@ -214,13 +213,13 @@
 
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Personal Training</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="classdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Personal Training</a>
                             <div class="dropdown-menu" aria-labelledby="classdropdown">
-                                <a class="dropdown-item" href="#">Book Personal Training</a>
-                                <a class="dropdown-item" href="#">Booked personal Trainings</a>
+                                <a class="dropdown-item" href="~/Account/Signin">Book Personal Training</a>
+                                <a class="dropdown-item" href="~/Account/Signin">Booked personal Trainings</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">View Trainers</a>
+                                <a class="dropdown-item" href="~/Home/Trainer">View Trainers</a>
 
                             </div>
                         </li>
@@ -237,12 +236,15 @@
 
                 </nav>
             }
+
         }
 
 
 
+
+
     </div>
-   
+
     @RenderBody()
     <div class="container body-content">
 
@@ -306,6 +308,7 @@
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/jquery-ui.min")
         @RenderSection("scripts", required: false)
     </div>
 

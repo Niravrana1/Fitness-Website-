@@ -9,36 +9,38 @@
 <div class="row ">
     @using (Html.BeginForm("Notavailable", "Trainer", FormMethod.Post, new { @class = "container pt-1" }))
     {
-    <div class="container-fluid">
-        @Html.AntiForgeryToken()
-        <hr />
-        <h4>Need style signup page</h4>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(m => m.NotavailableDate)
-            @Html.TextBoxFor(m => m.NotavailableDate, "{0:dd mm yyyy}", new { @class = "form-control", placeholder = "MM/DD/YYYY", value = @DateTime.Now.ToString("yyyy - MM - dd"), type = "date", Id = "txtDate" })
-            @Html.ValidationMessageFor(m => m.NotavailableDate);
+        <div class="container-fluid">
+            @Html.AntiForgeryToken()
+            <hr />
+            <h4>Need style signup page</h4>
+            @Html.ValidationSummary(true,"error", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.NotavailableDate)
+                @Html.TextBoxFor(m => m.NotavailableDate, "", new { @class = "form-control datepicker", placeholder = "MM/DD/YYYY", Id = "txtDate" })
+                @Html.ValidationMessageFor(m => m.NotavailableDate);
 
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.StartTime)
-            @Html.TextBoxFor(m => m.StartTime, "", new { @class = "form-control", placeholder = "HH", id="Stime" })
-            @Html.ValidationMessageFor(m => m.StartTime);
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StartTime)
+                @Html.TextBoxFor(m => m.StartTime, "", new { @class = "form-control", placeholder = "HH", id = "Stime" })
+                @Html.ValidationMessageFor(m => m.StartTime);
 
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Endtime)
-            @Html.TextBoxFor(m => m.Endtime, "", new { @class = "form-control", placeholder = "HH", id="Etime" })
-            @Html.ValidationMessageFor(m => m.Endtime);
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Endtime)
+                @Html.TextBoxFor(m => m.Endtime, "", new { @class = "form-control", placeholder = "HH", id = "Etime" })
+                @Html.ValidationMessageFor(m => m.Endtime);
 
+            </div>
+
+            <button type="submit" class="btn gbutton" id="timebtn">Add</button>
         </div>
-        
-        <button type="submit" class="btn gbutton" id="timebtn">Add</button>
-    </div>
     }
-   </div>
+</div>
 
 @section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js">
+    </script>
     <script type="text/javascript">
         $("#timebtn").click(function (event) {
             var starttime = $("#Stime").val();
@@ -47,6 +49,23 @@
             console.log(endtime);
 
         });
+
+
+
+        //Date picker function
+
+        $(function () {
+            $(".datepicker").datepicker({
+                changeYear: true,
+                changeMonth: true,
+                minDate:0,
+                dateFormat: "dd-mm-yy"
+
+            });
+        });
+
+
     </script>
-    
-    }
+
+
+}

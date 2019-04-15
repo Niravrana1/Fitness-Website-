@@ -55,7 +55,8 @@ namespace Fitness.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("End time must be greater then start time");
+                    ModelState.AddModelError("error","End time must be greater then start time");
+                    return View(notavailable);
                 }
               
             }
