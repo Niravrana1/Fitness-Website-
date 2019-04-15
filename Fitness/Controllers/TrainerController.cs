@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Fitness.Models;
 
 namespace Fitness.Controllers
 {
+    [Authorize(Roles ="Trainer")]
     public class TrainerController : Controller
     {
+        private FitnessEntitiesDbContext _context;
+
+        public TrainerController()
+        {
+            _context = new FitnessEntitiesDbContext();
+        }
+
         // GET: Trainer
         public ActionResult Index()
         {
@@ -15,9 +24,39 @@ namespace Fitness.Controllers
         }
 
         //GET: Trainer/ Availability (Edit / Delete Not available time , )
-        public ActionResult Availability()
+        [HttpGet]
+        public ActionResult NotAvailable()
         {
             return View();
+        }
+
+        //public JsonResult CheckStartEndTime(int s,int e)
+        //{
+        //    var result; 
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+
+        [HttpPost]
+        public ActionResult NotAvailable(NotavailableDatetime notavailable)
+        {
+            if(ModelState.IsValid)
+            {
+               int trainerid = _context.Trainers.Single(m => m.userid == Session["UserId"].ToString()).TrainerId; // Getting trainer id of current loged in trainer
+                NotavailableDatetime na = new NotavailableDatetime();
+                na.TrainerId = trainerid;
+                na.NotavailableDate = notavailable.NotavailableDate;
+                na.StartTime = notavailable.StartTime;
+                na.Endtime = notavailable.Endtime;
+                _context.NotavailableDatetimes.Add(na);
+                _context.SaveChanges();
+                return RedirectToAction("Notavailable","Trainer");
+            }
+            else
+            {
+                return View(notavailable);
+            }
+
+            
         }
 
         //GET: Trainer/ Class (Edit / Delete Class, Edit / Delete Class Time ,Edit class Price )

@@ -204,6 +204,137 @@ namespace Fitness.Controllers
             return View(model);
         }
 
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin")] // Only admin can access this methods
+        public ActionResult SignupManager()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles ="Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SignupManager(Signupviewmodel smv)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = smv.UserName, Email = smv.Email, PhoneNumber = smv.PhoneNumber };
+                var result = await UserManager.CreateAsync(user, smv.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    Manager c = new Manager();
+                    string uid = _context.AspNetUsers.Where(m => m.UserName == smv.UserName).FirstOrDefault().Id;
+                    c.userid = uid;
+                    c.FirstName = smv.FirstName;
+                    c.LastName = smv.LastName;
+                    c.DateOfBirth = smv.DateOfBirth;
+                    c.StreetAddress = smv.StreetAddress;
+                    c.City = smv.City;
+                    c.State = smv.State;
+                    c.ZipCode = smv.ZipCode;
+                    _context.Managers.Add(c);
+                    _context.SaveChanges();
+
+
+
+
+                    // ASPNETUSERROLES require two values(User Id, Role Id)
+
+                    string Id = uid; // Getting userid 
+                    string Name = _context.AspNetRoles.Single(m => m.Name == "Manager").Name; // Role id
+                    string Nameid = _context.AspNetRoles.Single(m => m.Name == "Manager").Id;
+
+
+                    ApplicationDbContext ctx = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(ctx));
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                    if (roleManager.RoleExists(Name))
+                    {
+                        userManager.AddToRole(Id, Name);
+                        ViewBag.Message = "Role assigned successfully !";
+                    }
+
+                    return RedirectToAction("Index", "Admin");
+                }
+                AddErrors(result);
+            }
+            return View(smv);
+        }
+
+        [HttpGet]
+        [Authorize(Roles ="Manager")]
+        public ActionResult SignupTrainer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Manager")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SignupTrainer(Signupviewmodel smv)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = smv.UserName, Email = smv.Email, PhoneNumber = smv.PhoneNumber };
+                var result = await UserManager.CreateAsync(user, smv.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    Trainer c = new Trainer();
+                    string uid = _context.AspNetUsers.Where(m => m.UserName == smv.UserName).FirstOrDefault().Id;
+                    c.userid = uid;
+                    c.FirstName = smv.FirstName;
+                    c.LastName = smv.LastName;
+                    c.DateOfBirth = smv.DateOfBirth;
+                    c.StreetAddress = smv.StreetAddress;
+                    c.City = smv.City;
+                    c.State = smv.State;
+                    c.ZipCode = smv.ZipCode;
+                    _context.Trainers.Add(c);
+                    _context.SaveChanges();
+
+
+
+
+                    // ASPNETUSERROLES require two values(User Id, Role Id)
+
+                    string Id = uid; // Getting userid 
+                    string Name = _context.AspNetRoles.Single(m => m.Name == "Trainer").Name; // Role id
+                    string Nameid = _context.AspNetRoles.Single(m => m.Name == "Trainer").Id;
+
+
+                    ApplicationDbContext ctx = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(ctx));
+                    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+                    if (roleManager.RoleExists(Name))
+                    {
+                        userManager.AddToRole(Id, Name);
+                        ViewBag.Message = "Role assigned successfully !";
+                    }
+
+                    return RedirectToAction("Index", "Manager");
+                }
+                AddErrors(result);
+            }
+            return View(smv);
+        }
+
         //[HttpPost]
         //public ActionResult Login(LoginViewModel lv)
         //{

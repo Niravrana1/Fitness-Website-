@@ -11,13 +11,27 @@ namespace Fitness.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class NotavailableDatetime
     {
         public int id { get; set; }
+
         public Nullable<int> TrainerId { get; set; }
+
+        [Display(Name ="Date")]
+        [Required(ErrorMessage = "Please select Date")]
+        [DisplayFormat(DataFormatString = "{0:mm/dd/yy}")]
+        [Column(TypeName = "DateTime2")]
         public Nullable<System.DateTime> NotavailableDate { get; set; }
+
+        [Display(Name ="Start Time")]
+        [Required(ErrorMessage = "Please enter Start Time")]
         public Nullable<System.TimeSpan> StartTime { get; set; }
+
+        [Display(Name ="End Time")]
+        [Required(ErrorMessage = "Please enter End Time")]
         public Nullable<System.TimeSpan> Endtime { get; set; }
     
         public virtual Trainer Trainer { get; set; }

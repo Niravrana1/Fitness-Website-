@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Fitness.Models.Viewmodel;
 
+
 namespace Fitness.Models.Validation
 {
     public class _18yearandold : ValidationAttribute

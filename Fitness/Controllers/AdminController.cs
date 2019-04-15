@@ -54,5 +54,11 @@ namespace Fitness.Controllers
             return View(Ar);
            
         }
+
+
+        public ActionResult Createaccount()
+        {
+            return View();
+        }
     }
 }

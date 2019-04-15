@@ -1,0 +1,80 @@
+﻿@model Fitness.Models.Viewmodel.Signupviewmodel
+@{
+    ViewBag.Title = "SignupManager";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>SignupManager</h2>
+
+<div class="row ">
+    @using (Html.BeginForm("SignupManager", "Account", FormMethod.Post, new { @class = "container pt-1" }))
+    {
+        <div class="container-fluid">
+            @Html.AntiForgeryToken()
+            <hr />
+            <h4>Need style signup page</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DateOfBirth)
+                @Html.TextBoxFor(m => m.DateOfBirth, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.DateOfBirth)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StreetAddress)
+                @Html.TextBoxFor(m => m.StreetAddress, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.StreetAddress)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.State)
+                @Html.TextBoxFor(m => m.State, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.State)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ZipCode)
+                @Html.TextBoxFor(m => m.ZipCode, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ZipCode)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.TextBoxFor(m => m.Password, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+            <button type="submit" class="gbutton btn">Create Manager</button>
+        </div>
+    }
+</div>

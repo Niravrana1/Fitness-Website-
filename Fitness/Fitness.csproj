@@ -245,6 +245,7 @@
       <DependentUpon>Fitness.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Validation\18yearandold.cs" />
+    <Compile Include="Models\Viewmodel\Adminviewmodel.cs" />
     <Compile Include="Models\Viewmodel\Fitnessviewmodel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -383,11 +384,13 @@
     <Content Include="Views\Admin\AddRole.cshtml" />
     <Content Include="Views\Customer\Home.cshtml" />
     <Content Include="Views\Customer\profile.cshtml" />
+    <Content Include="Views\Account\SignupManager.cshtml" />
+    <Content Include="Views\Account\SignupTrainer.cshtml" />
+    <Content Include="Views\Trainer\NotAvailable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Manager\" />
-    <Folder Include="Views\Trainer\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
