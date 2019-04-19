@@ -64,6 +64,7 @@
           <Property Name="Trainerid" Type="int" />
           <Property Name="ClassName" Type="nvarchar" MaxLength="100" />
           <Property Name="ClassPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ClassDiscription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ClassTime">
           <Key>
@@ -620,6 +621,7 @@
           <NavigationProperty Name="Trainer" Relationship="FitnessModel.FK__Classes__Trainer__5812160E" FromRole="Class" ToRole="Trainer" />
           <NavigationProperty Name="ScheduleClasses" Relationship="FitnessModel.FK__ScheduleC__class__628FA481" FromRole="Class" ToRole="ScheduleClass" />
           <NavigationProperty Name="ClassTimes" Relationship="FitnessModel.FK__ClassTime__Class__656C112C" FromRole="Class" ToRole="ClassTime" />
+          <Property Name="ClassDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -946,6 +948,7 @@
           <EntitySetMapping Name="Classes">
             <EntityTypeMapping TypeName="FitnessModel.Class">
               <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="ClassDiscription" ColumnName="ClassDiscription" />
                 <ScalarProperty Name="ClassPrice" ColumnName="ClassPrice" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="Trainerid" ColumnName="Trainerid" />

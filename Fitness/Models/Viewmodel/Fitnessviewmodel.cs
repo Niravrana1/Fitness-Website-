@@ -96,4 +96,21 @@ namespace Fitness.Models.Viewmodel
         public string ConfirmPassword { get; set; }
 
     }
+
+    public class Addclassviewmodel
+    {
+        [Required(ErrorMessage = "Please enter Class name")]
+        [StringLength(50)]
+        [Display(Name ="Class Name")]
+        public string ClassName { get; set; }
+
+        [Required(ErrorMessage = "Please enter Class discription")]
+        [StringLength(50)]
+        [Display(Name = "Class Discription")]
+        public string ClassDiscription { get; set; }
+
+        [Required(ErrorMessage = "Please enter class price")]
+        [Display(Name ="Class Price")]
+        public Nullable<decimal> ClassPrice { get; set; }
+    }
 }
