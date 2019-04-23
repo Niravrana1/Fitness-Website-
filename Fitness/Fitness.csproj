@@ -434,6 +434,9 @@
     <Content Include="Views\Account\SignupManager.cshtml" />
     <Content Include="Views\Account\SignupTrainer.cshtml" />
     <Content Include="Views\Trainer\NotAvailable.cshtml" />
+    <Content Include="Views\Trainer\Addclass.cshtml" />
+    <Content Include="Views\Trainer\Viewclasses.cshtml" />
+    <Content Include="Views\Trainer\EditClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Manager\" />

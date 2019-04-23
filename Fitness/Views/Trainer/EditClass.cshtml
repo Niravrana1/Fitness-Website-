@@ -1,0 +1,36 @@
+﻿@model Fitness.Models.Viewmodel.Addclassviewmodel
+@{
+    ViewBag.Title = "EditClass";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>EditClass</h2>
+
+<div class="row ">
+    @using (Html.BeginForm("EditClass", "Trainer", FormMethod.Post, new { @class = "container pt-1" }))
+    {
+        <div class="container-fluid">
+            @Html.AntiForgeryToken()
+            <hr />
+            <h4>Need style signup page</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassName)
+                @Html.TextBoxFor(m => m.ClassName, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClassName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassDiscription)
+                @Html.TextBoxFor(m => m.ClassDiscription, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClassDiscription)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassPrice)
+                @Html.TextBoxFor(m => m.ClassPrice, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ClassPrice)
+            </div>
+            <button class="btn gbutton">Update</button>
+        </div>
+    }
+</div>
+

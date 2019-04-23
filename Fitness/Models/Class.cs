@@ -25,6 +25,7 @@ namespace Fitness.Models
         public Nullable<int> Trainerid { get; set; }
         public string ClassName { get; set; }
         public Nullable<decimal> ClassPrice { get; set; }
+        public string ClassDiscription { get; set; }
     
         public virtual Trainer Trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

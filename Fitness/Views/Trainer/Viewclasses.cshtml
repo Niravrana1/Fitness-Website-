@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Fitness.Models.Class>
+    @{
+        ViewBag.Title = "Viewclasses";
+        Layout = "~/Views/Shared/_HomePage.cshtml";
+    }
+
+    <h2>Viewclasses</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>Class Name</th>
+        <th>Class Description</th>
+        <th>Class Price</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        @foreach (var c in Model)
+        {
+            <td>@c.ClassName</td>
+            <td>@c.ClassDiscription</td>
+            <td>@c.ClassPrice</td>
+            <td>@Html.ActionLink("Edit","EditClass","Trainer",new{id = c.ClassId },null)</td>
+            <td>@Html.ActionLink("Delete","DeleteClass","Trainer",new { id = c.ClassId },null)</td>
+        }
+    </tr>
+</table>
