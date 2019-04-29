@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Fitness.Models.ScheduleTrainer>
+
+@{
+    ViewBag.Title = "Listofscheduledtrainingsession";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>Listofscheduledtrainingsession</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrainerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppointmentStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditTrainingsession", "Customer", new { id=item.Id },null) |
+            @Html.ActionLink("Delete", "DeleteTrainingsession", "Customer", new { id=item.Id },null) |
+            @Html.ActionLink("Details", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

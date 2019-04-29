@@ -1,0 +1,65 @@
+﻿@model Fitness.Models.Trainerrate
+@{
+    ViewBag.Title = "Trainerrate";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>Trainerrate</h2>
+
+<div class="row ">
+    @using (Html.BeginForm("Trainerrate", "Trainer", FormMethod.Post, new { @class = "container pt-1" }))
+    {
+        <div class="container-fluid">
+            @Html.AntiForgeryToken()
+            <hr />
+            <h4>Need style signup page</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Duration)
+                @Html.DropDownListFor(m => m.Duration, new List<SelectListItem> {
+               new SelectListItem{Text="1 Hour",Value="1"},
+               new SelectListItem{Text="2 Hour",Value="2"},
+               new SelectListItem{Text="3 hour", Value="3"}
+           },"--Select Hours--", new { @class = "form-control" , id ="duration" })
+                @Html.ValidationMessageFor(m => m.Duration)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Price)
+                @Html.TextBoxFor(m => m.Price, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Price)
+            </div>
+
+            <button class="btn gbutton">Add Price</button>
+        </div>
+    }
+</div>
+
+@section scripts{
+
+
+    <script>
+        $("#duration").change(function () {
+            let dur = $("#duration").val();
+
+            
+            $.ajax({
+
+                url: '@Url.Action("Checktrainerrate", "Trainer")',
+                data: { time: dur },
+                type: "POST",
+                success: function (values) {
+                    alert(values.message);
+                },
+                error: function (values) {
+                    alert("Hello ");
+                    alert(values.message);
+
+
+                },
+
+            }
+            )
+        });
+    </script>
+}
+

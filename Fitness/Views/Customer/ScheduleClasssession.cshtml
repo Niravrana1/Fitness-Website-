@@ -1,0 +1,167 @@
+﻿@model Fitness.Models.Viewmodel.Scheduleclassviewmodel
+
+@{
+    ViewBag.Title = "ScheduleClasssession";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>ScheduleClasssession</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>ScheduleClass</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.classid, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.classid, (SelectList)ViewBag.Classes, "--Select Class--", new { @class = "form-control", id = "cvalue" })
+            @Html.ValidationMessageFor(model => model.classid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Membershiptype, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Membershiptype, (SelectList)ViewBag.membershiptype, "--Select Membership type--", new { @class = "form-control", id = "mvalue" })
+            @Html.ValidationMessageFor(model => model.Membershiptype, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ScheduleDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ScheduleDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "MM/DD/YYYY" } })
+            @Html.ValidationMessageFor(model => model.ScheduleDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ScheduleTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ScheduleTime,new List<SelectListItem>
+            {
+           new SelectListItem{Text="09:00 AM",Value="09:00"},
+
+            }, "--Select time--", new { @class = "form-control", id="stime" })
+            @Html.ValidationMessageFor(model => model.ScheduleTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "tprice" } })
+            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js">
+    </script>
+
+    <script>
+
+        $(".datepicker").datepicker({
+            onSelect: function (dateText) {
+                alert(dateText);
+                let classvalue = $("#cvalue").val();
+                let cdate = dateText;
+                let membership = $("#mvalue").val();
+
+                var validation = $(".datepicker").val() != null && $(".datepicker").val() != "" && $("#cvalue").val() != null && $("#cvalue").val() != "" && cdate != null && cdate != "";
+                console.log(validation);
+                if (validation) {
+                    $.ajax({
+                        url: '@Url.Action("getclasstime","customer")',
+                        data: { classdate: cdate, classid: classvalue },
+                        type: "POST",
+                        success: function (value) {
+                            console.log(value);
+                            $("#stime").empty();
+                            $.each(value.result, function (key, val) {
+                                console.log(val.text);
+                                console.log(val.Value);
+                                $('#stime')
+                                    .append($("<option></option>")
+                                        .attr("value", val.Value )
+                                        .text(val.Text));
+                            });
+                            //$("#stime").empty();
+                            //$.each(value.result, function (key, val) {
+
+                            //    console.log(val.text);
+                            //    console.log(val.Value);
+                            //    $('#stime')
+                            //        .append($("<option></option>")
+                            //            .attr("value", val.Value + ":00")
+                            //            .text(val.Text));
+                            //});
+
+
+                        },
+                        error: function (result) {
+                            alert("error" + result)
+                        }
+                    });
+                }
+            }
+        });
+
+
+                    $("#mvalue").change(function () {
+
+                        let membership = $("#mvalue").val();
+                        let classval = $("#cvalue").val();
+                        console.log(membership);
+                        console.log(classval);
+             //var validation = $("#tvalue").val() != null && $("#dvalue").val() != null && $("#tvalue").val() != "" && $("#dvalue").val() != "";
+                        var validation = $("#mvalue").val() != null && $("#mvalue").val() != "" && $("#cvalue").val() != null && $("#cvalue").val() != "";
+                        console.log(validation);
+            if (validation) {
+               
+                $.ajax({
+                    url: "@Url.Action("getclasspricewithmembership", "Customer")",
+                    data: { mtype: membership, cname: classval },
+
+                    type: "POST",
+                    //dataType: 'application/json',
+                    //contentType: 'application/json',
+                    success: function (value) {
+                        $("#tprice").val(value.result+".00");
+                    },
+                    error: function (result) {
+                        alert("error" + result)
+                    }
+
+                })
+            }
+            else {
+                console.log("Select class and membership type");
+            }
+        });
+
+
+
+    </script>
+
+    }

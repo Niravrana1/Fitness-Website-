@@ -52,7 +52,7 @@ namespace Fitness.Controllers
             }
 
             return View(Ar);
-           
+
         }
 
 

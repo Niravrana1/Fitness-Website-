@@ -12,7 +12,7 @@ namespace Fitness.Models.Validation
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var Customer = (Signupviewmodel)validationContext.ObjectInstance;
+            var Customer = (Signuptrainerviewmodel)validationContext.ObjectInstance;
             if (Customer.DateOfBirth == null)
             {
                 return new ValidationResult("Birthdate is require");

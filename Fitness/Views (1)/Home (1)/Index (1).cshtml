@@ -1,0 +1,284 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+<style>
+    h2{
+        font-weight:500;
+    }
+    .carousel {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        margin-left: -50vw;
+    }
+
+    .carousel-img {
+        width: 100%;
+    }
+
+    .parallax-window {
+        min-height: 500px;
+        background: transparent;
+    }
+    .container-fluid{
+        padding-left:0;
+        padding-right:0;
+    }
+    .backG {
+        background-color: #f8f9fa;
+    }
+   .sessions{
+       margin-top:48px;
+       margin-bottom:48px;
+   }
+    .symbols{
+        margin-bottom:20px;
+        height:56px;
+        width:56px;
+    }
+    .sessions hr{
+        border:1px solid #F23A2E;
+        width:10%;
+        margin:20px 0;
+       content:"";
+       
+    }
+    .check-list{
+        float:left;
+        padding:0;
+    }
+    .check-list li {
+        text-decoration: none;
+        display: block;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    span{
+        color:forestgreen;
+    }
+    .container{
+        padding-left:0;
+        padding-right:0;
+    }
+    /*Style fot carousel to take the whole width if the view*/
+    .carousel{
+        width:auto;
+        left:0;
+        margin-left:0;
+    }
+    .img-comment{
+        width:80px;
+        height:80px;
+        margin-left:1em;
+        margin-right:1em;
+        margin-bottom:2em;
+    }
+   
+</style>
+<!--Main Header carousel-->
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+
+            <img src="~/Images/barbell.jpg" class="carousel-img" />
+        </div>
+        <div class="carousel-item">
+
+            <img src="~/Images/bodybuilding.jpg" class="carousel-img" />
+        </div>
+        <div class="carousel-item">
+
+            <img src="~/Images/Women.jpg" class="carousel-img" />
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>
+<!--End of main header carousel section-->
+<!--container for type of classes with caption. 3 col in large screen and 6 after it reaches a meian one-->
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-md-6 col-lg-3 backG">
+            <!--container for yoga section-->
+            <div class="container sessions pl-4">
+                <img class="symbols" src="~/Images/padmasana.png" alt="yoga"/>
+                <p class="text-uppercase">Yoga</p><hr/>
+                <p>Find you're inner piece, while gaining flexibility,strenght and improve your circulatory health.</p>
+            </div>
+        </div>
+        <div  class="col-md-6 col-lg-3 ">
+            <!--container for weight trraining sec-->
+            <div class="container sessions pl-4">
+                <img class="symbols" src="~/Images/man-lifting-weights.png" alt="weights" />
+                <p class="text-uppercase">Weight Training</p><hr />
+                <p>Increase muscle mass and strenght, get the body you always dream off. It doesn't matter when you start but if you start.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 backG">
+            <!--container for weight loss sec-->
+            <div class="container sessions pl-4">
+                <img class="symbols" src="~/Images/running.png" />
+              <p class="text-uppercase">Weight Loss</p><hr />
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugiat iure eveniet perferendis odit est.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <!--container for dancing sec-->
+            <div class="container sessions p-lg-4">
+                <img class="symbols" src="~/Images/quaver-outline.png" />
+                <p class="text-uppercase">Dancing</p><hr />
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugiat iure eveniet perferendis odit est.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of classes with captin section-->
+
+<!--Picture and About our vision-->
+<div class="container mb-4 pb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <div class="container ">
+                <h2 class="text-uppercase">All about our <strong class="font-weight-bolder">vision</strong></h2>
+                <p class="lead">
+                    Our goals is that anyone can have a healthy lifestyle no matter who you are or what you do. There's no limit to what
+                    you can do
+                </p>
+                <p>ste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, quas.</p>
+                <ul class="check-list">
+                    <li>
+                        <span>&#10004;</span> Your own time
+                    </li>
+                    <li>
+                        <span>&#10004;</span> Choose your trainer
+                    </li>
+                    <li>
+                        <span>&#10004;</span>Flexible prices
+                    </li>
+                    <li>
+                        <span>&#10004;</span> Great results
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-lg gbutton">Sign Up Now</a>
+                    </li>
+                </ul>
+               
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container">
+                <img class="img-fluid mx-auto d-block" src="~/Images/active-adult-biceps-416809.jpg" alt="bigimg" style="padding-top:100px;"/>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Picture and our vision section-->
+
+<!--Carousel of feautered classes-->
+<div class="container-fluid" style="background:#f8f9fa;">
+<div class="container">
+    <h6 class="text-uppercase mt-4 pt-4">Featured Class</h6><hr style="border:1px solid #F23A2E; width:5%; background-color:#F23A2E; margin:0 0 3em 0; "/>
+    <div id="mySlider" class="carousel slide" data-ride="carousel">
+        <!--Indicaors or dashes each dash slides to the index applied -->
+        <ul class="carousel-indicators">
+            <li data-target="#mySlider" data-slide-to="0" class="active"></li>
+            <li data-target="#mySlider" data-slide-to="1" ></li>
+        </ul>
+        <div class="carousel-inner">
+            <!--active slide-->
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img class="card-img-top img-fluid" src="~/Images/athlete-barbell-body-1552249.jpg" alt="1stImg" />
+                        <p class="media-heading text-uppercase p-2">Weight Lifting</p>
+                        <p>Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="card-img-top img-fluid" src="~/Images/endurance-exercise-female-40751.jpg" alt="2ndImg" />
+                        <p class="media-heading text-uppercase p-2">Weight Lifting</p>
+                        <p>Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="card-img-top img-fluid" src="~/Images/balance-beach-blond-hair-1117493.jpg" alt="3rdImg" />
+                        <p class="media-heading text-uppercase p-2">Weight Lifting</p>
+                        <p>Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit </p>
+                    </div>
+                </div>
+            </div>
+            <!--End of active slide-->
+            <div class="carousel-item ">
+                <div class="row">
+                    <div class="col-lg-4">
+                            <img class="card-img-top img-fluid" src="~/Images/athlete-barbell-body-1552249.jpg" alt="1stImg" />
+                        <p class="media-heading text-uppercase p-2">Weight Lifting</p>
+                        <p>Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="card-img-top img-fluid" src="~/Images/endurance-exercise-female-40751.jpg" alt="2ndImg" />
+                        <p class="media-heading text-uppercase p-2">Weight Lifting</p>
+                        <p>Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <img class="card-img-top img-fluid" src="~/Images/balance-beach-blond-hair-1117493.jpg" alt="3rdImg" />
+                        <p class="media-heading text-uppercase p-2">Weight Lifting</p>
+                        <p>Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima, iure provident. Lorem ipsum dolor sit </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end of image carousel-->
+         <a class="carousel-control-prev" href="#mySlider" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#mySlider" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+    </div>
+</div>
+</div>
+<!--end of carousel featured classes section-->
+<!--Beginning of comments section-->
+<div class="container mt-5 mb-5" style="border:1px solid black;">
+    <h5 class="text-center">Testimonals</h5><hr style="border:1px solid #F23A2E; width:5%; background-color:#F23A2E;" />
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="~/Images/emile.jpg" alt="girlImg " class="rounded-circle float-left img-fluid img-comment" />
+            
+                <h6>Luis Ramirez, Developer</h6>
+                <blockquote>
+                    <p class="">
+                        "Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima,
+                        iure provident. Lorem ipsum dolor sit amet, consectetur adipisicing elit"
+                    </p>
+                </blockquote>
+        </div>
+        <div class="col-lg-6">
+            <img src="~/Images/emile.jpg" alt="girlImg " class="rounded-circle float-left img-fluid img-comment" />
+            <h6>Nirav Rana,Developer</h6>
+            <blockquote>
+                <p>
+                    "Iste aut dolorem veritatis saepe nesciunt distinctio voluptas sapiente sunt perspiciatis autem minima,
+                    iure provident. Lorem ipsum dolor sit amet, consectetur adipisicing elit"
+                </p>
+            </blockquote>
+        </div>
+    </div>
+
+</div>

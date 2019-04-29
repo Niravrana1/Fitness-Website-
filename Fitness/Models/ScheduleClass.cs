@@ -16,14 +16,14 @@ namespace Fitness.Models
     {
         public int id { get; set; }
         public Nullable<int> UserId { get; set; }
-        public Nullable<int> TrainerId { get; set; }
         public Nullable<int> classid { get; set; }
-        public Nullable<decimal> price { get; set; }
+        public Nullable<int> Membershiptype { get; set; }
         public Nullable<System.DateTime> ScheduleDate { get; set; }
         public Nullable<System.TimeSpan> ScheduleTime { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
     
         public virtual Class Class { get; set; }
+        public virtual ClassMembershipType ClassMembershipType { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual Trainer Trainer { get; set; }
     }
 }

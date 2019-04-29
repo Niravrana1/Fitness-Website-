@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Fitness.Models;
 
 namespace Fitness.Controllers
 {
     public class HomeController : Controller
     {
+
+        private FitnessEntitiesDbContext _Context;
+
+        public HomeController()
+        {
+            _Context = new FitnessEntitiesDbContext();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -37,7 +46,7 @@ namespace Fitness.Controllers
         {
             return View();
         }
-        
+
         //GET: Home/SocialMedia
         [HttpGet]
         public ActionResult SocialMedia()
@@ -60,10 +69,17 @@ namespace Fitness.Controllers
 
 
 
-        public ActionResult Trainer()
+        public ActionResult Practice()
         {
             return View();
         }
-       
+
+        public ActionResult ViewTrainers()
+        {
+            var Listoftrainers = _Context.Trainers.ToList();
+            Listoftrainers.Count();
+            return View(Listoftrainers);
+        }
+
     }
 }

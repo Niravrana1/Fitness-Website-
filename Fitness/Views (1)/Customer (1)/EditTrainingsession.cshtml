@@ -1,0 +1,229 @@
+﻿@model Fitness.Models.Viewmodel.Shceduletrainingsessionviewmodel
+
+@{
+    ViewBag.Title = "EditTrainingsession";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>EditTrainingsession</h2>
+
+<h2>ScheduleTrainingsession</h2>
+
+@using (Html.BeginForm("EditTrainingsession", "Customer", FormMethod.Post, new { @class = "container pt-1" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Shceduletrainingsessionviewmodel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrainerId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.TrainerId, (SelectList)ViewBag.Trainer, "--Select Trainer--", new { @class = "form-control", id = "tvalue" })
+                @Html.ValidationMessageFor(model => model.TrainerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.duration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.duration, new List<SelectListItem> {
+              new SelectListItem{Text="1 Hour",Value="1"},
+              new SelectListItem{Text="2 Hour",Value="2"},
+              new SelectListItem{Text="3 hour", Value="3"}
+          },"--Select Hours--", new { @class = "form-control" , id = "dvalue" })
+                @Html.ValidationMessageFor(model => model.duration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "tprice" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ScheduledDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ScheduledDate, "", new { @class = "form-control datepicker", placeholder = "MM/DD/YYYY" })
+                @*@Html.TextBoxFor(model => model.ScheduledDate, "", new { @class = "form-control datepicker", id = "sdate" })*@
+                @Html.ValidationMessageFor(model => model.ScheduledDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ScheduledTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.ScheduledTime,new List<SelectListItem>
+               {
+              new SelectListItem{Text="09:00 AM",Value="09:00"},
+              new SelectListItem{Text="10:00 AM",Value="10:00"},
+              new SelectListItem{Text="11:00 AM",Value="11:00"},
+              new SelectListItem{Text="12:00 AM",Value="12:00"},
+              new SelectListItem{Text="13:00 PM",Value="13:00"},
+              new SelectListItem{Text="14:00 PM",Value="14:00"},
+              new SelectListItem{Text="15:00 PM",Value="15:00"},
+              new SelectListItem{Text="16:00 PM",Value="16:00"},
+              new SelectListItem{Text="17:00 PM",Value="17:00"},
+              new SelectListItem{Text="18:00 PM",Value="18:00"},
+              new SelectListItem{Text="19:00 PM",Value="19:00"},
+              new SelectListItem{Text="20:00 PM",Value="20:00"},
+              new SelectListItem{Text="21:00 PM",Value="21:00"},
+              new SelectListItem{Text="22:00 PM",Value="22:00"}
+
+               }, "--Select start time--", new { @class = "form-control", id="stime" })
+                @Html.ValidationMessageFor(model => model.ScheduledTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <button type="submit" class="gbutton btn">Schedule</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js">
+
+
+    </script>
+
+    <script>
+        $("#dvalue").change(function () {
+            let TrainerId = $("#tvalue").val();
+            let duration = $("#dvalue").val();
+
+            var validation = $("#tvalue").val() != null && $("#dvalue").val() != null && $("#tvalue").val() != "" && $("#dvalue").val() != "";
+            if (validation) {
+
+                $.ajax({
+                    url: "@Url.Action("gettrainerprice", "Customer")",
+                    data: { tid: TrainerId, dtime: duration },
+
+                    type: "POST",
+                    //dataType: 'application/json',
+                    //contentType: 'application/json',
+                    success: function (value) {
+                        alert(value.result);
+                        $("#tprice").val(value.result);
+                    },
+                    error: function (result) {
+                        alert("error" + result)
+                    }
+
+                })
+            }
+            else {
+                console.log("Select a trainer");
+            }
+        });
+
+        @*$(".datepicker").datepicker({
+            onSelect: function (date, instance) {
+                let scheduledate = ("#sdate").val();
+
+            var validation = $("#sdate").val() != null && $("#sdate").val() != "";
+            if (validation) {
+                $.ajax({
+                    url: '@Url.Action("checkavailabletime","customer")',
+                    data: { sdate: scheduledate },
+                    type: "POST",
+                    success: function (value) {
+                        alert(value.result);
+                    },
+                    error: function (result) {
+                        alert("error" + result)
+                    }
+                })
+            }
+
+            }
+        });*@
+
+        $(".datepicker").datepicker({
+            onSelect: function (dateText) {
+                alert(dateText);
+                let TrainerId = $("#tvalue").val();
+                let scheduledate = dateText;
+                let duration = $("#dvalue").val();
+
+                var validation = $(".datepicker").val() != null && $(".datepicker").val() != "";
+                if (validation) {
+                    $.ajax({
+                        url: '@Url.Action("checkavailabletime","customer")',
+                        data: { sdate: scheduledate, dvalue: duration, tvalue: TrainerId },
+                        type: "POST",
+                        success: function (value) {
+                            console.log(value);
+                            alert();
+
+                            //DID NOT WORKE
+                            //
+                            //$.each(value, function (key, value) {
+                            //    alert(key.text + value.value);
+                            //    $('#stime')
+                            //        .append($("<option></option>")
+                            //            .attr("value", key)
+                            //            .text(value));
+                            //});
+
+
+                            //$("#stime").empty();
+                            //$.each(value, function (key, val) {
+                            //    console.log(val.Text);
+                            //    console.log(val.Value);
+
+                            //    $('#stime')
+                            //        .append($("<option></option>")
+                            //            .attr("value", val.Value)
+                            //            .text(val.Text));
+                            //});
+                            $("#stime").empty();
+                            $.each(value.result, function (key, val) {
+
+                                console.log(val.text);
+                                console.log(val.Value);
+                                $('#stime')
+                                    .append($("<option></option>")
+                                        .attr("value",val.Value+":00")
+                                        .text(val.Text));
+                            });
+
+
+                        },
+                        error: function (result) {
+                            alert("error" + result)
+                        }
+                    });
+
+                    }
+                }
+            });
+
+
+
+
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "mm/dd/yy",
+                defaultDate: new Date(),
+                maxDate:0
+
+            });
+        });
+    </script>
+
+}

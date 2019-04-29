@@ -1,0 +1,147 @@
+﻿@model Fitness.Models.Viewmodel.Scheduletrainerviewmodel
+@{
+    ViewBag.Title = "ScheduleTraining";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<style>
+    .timg {
+        width: 200px;
+        border-radius: 20px;
+    }
+
+    .btn-block {
+        border-color: #F23A2E;
+        border-radius: 10px;
+        background-color: #F23A2E;
+    }
+
+        .btn-block:hover {
+            background-color: white;
+            color: #F23A2E;
+            transition: .5s;
+            border-color: #F23A2E;
+        }
+
+    .pricediv {
+        width: 300px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+        ul > li {
+            padding: 5px;
+        }
+
+    .colored-fb {
+        color: #3b5998;
+    }
+
+    .colored-insta {
+        color: transparent;
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        background-clip: text;
+        -webkit-background-clip: text;
+    }
+
+    .fa-medal {
+        color: orange;
+    }
+
+    .fa-history {
+        color: deepskyblue;
+    }
+
+    .fa-money-check-alt {
+        color: forestgreen;
+        font-size: 25px;
+        padding: 5px;
+    }
+</style>
+
+
+
+<div class="container-fluid pt-lg-5 pl-lg-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-5 text-center">
+                    <img src="~/Images/Trainers/@Model.trainer.Picture" class="img-fluid timg " />
+                    <p class="p-2"><b>@Model.trainer.FirstName &nbsp; @Model.trainer.LastName</b></p>
+                </div>
+                <div class="col-lg-6 ">
+                    <p><b>Introduction:</b> Only work in Sugar land / Missouri City / Stafford !</p>
+                    <p><b>About Trainer : </b>@Model.trainer.AboutTrainer</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b> Overview </b>
+                    <ul>
+                        <li><i class="fas fa-medal"></i>Current Top Pro</li>
+                        <li><i class="fas fa-trophy"></i>Hired 90 times</li>
+                        <li><i class="fas fa-user-check"></i>Background checked</li>
+                        <li><i class="fas fa-check-circle"></i>License verified</li>
+                        <li><i class="fas fa-history "></i>13 years in business</li>
+                    </ul>
+
+                    <b>Business hours</b>
+                    <div class="row">
+                        <p>
+                            (Central Time Zone)
+
+                        </p>
+                        <table class="table table-hover">
+                            <tr>
+                                <td><p>Mon - Fri  </p></td>
+
+                                <td><p>9:00 a.m. to 10:00 p.m </p></td>
+                            </tr>
+                            <tr>
+                                <td><p>Sat - Sun  </p></td>
+
+                                <td><p>12:00 p.m. to 8:00 p.m</p></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="col">
+                    <b> Payment methods </b>
+                    <ul>
+                        <li><i class="fas fa-money-check-alt"></i>Credit card, Cash, Venmo, Paypal</li>
+                    </ul>
+
+                    <b> Social media</b>
+                    <ul>
+                        <li><i class="fab fa-instagram nav-link colored-insta"></i>Instagram</li>
+                        <li><i class="fab fa-facebook-f nav-link colored-fb "></i>Facebook</li>
+                    </ul>
+
+                    <b>
+                        Currently a Top Pro
+                    </b>
+                    <p>Top Pros are among the highest-rated, most popular professionals on Thumbtack.</p>
+                    <a href="~/Customer/ScheduleTrainingsession/@Model.trainer.TrainerId" class="btn btn-primary btn-lg btn-block ">Schedule Training Session</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+
+            <div class="justify-content-center shadow p-3 mb-5 bg-white rounded pricediv p-4">
+                <b>@Model.price</b>
+                <p><small>estimate cost</small></p>
+                <hr />
+                <button type="button" class="btn btn-primary btn-lg btn-block p-3">Contact Trainer</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block p-3">Check Availability</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

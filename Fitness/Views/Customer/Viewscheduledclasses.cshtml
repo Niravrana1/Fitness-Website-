@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Fitness.Models.Viewmodel.Scheduleclassviewmodel>
+
+@{
+    ViewBag.Title = "Viewscheduledclasses";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>Viewscheduledclasses</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.classname)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.MembershipName)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.classname)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.MembershipName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleTime)
+        </td>
+        <td>
+         
+            @Html.ActionLink("Details","ScheduledclassDetails", "Customer", new {  id=item.scheduledclassid },null) |
+            @Html.ActionLink("Delete","DeleteScheduledclass", "Customer", new {  id=item.scheduledclassid },null)
+        </td>
+    </tr>
+}
+
+</table>

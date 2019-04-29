@@ -1,0 +1,76 @@
+﻿@model Fitness.Models.Viewmodel.Addclasstimeviewmodel
+@{
+    ViewBag.Title = "AddClassTime";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>AddClassTime</h2>
+
+<div class="row ">
+    @using (Html.BeginForm("AddClassTime", "Trainer", FormMethod.Post, new { @class = "container pt-1", id ="classtimeform" }))
+    {
+        <div class="container-fluid">
+            @Html.AntiForgeryToken()
+            <hr />
+            <h4>Need style signup page</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Classid)
+                @Html.DropDownListFor(m => m.Classid,(SelectList)ViewBag.ClassList,"--Select Class--", new { @class = "form-control", id = "cvalue" })
+                @Html.ValidationMessageFor(m => m.Classid)
+            </div>
+           
+            <div class="form-group">
+                @Html.LabelFor(m => m.ClassTime)
+                @Html.DropDownListFor(m => m.ClassTime,new List<SelectListItem> {
+               new SelectListItem { Text = "09:00 AM", Value = "09:00" },
+               new SelectListItem { Text = "10:00 AM", Value = "10:00" },
+               new SelectListItem { Text = "11:00 AM", Value = "11:00" },
+               new SelectListItem { Text = "12:00 AM", Value = "12:00" },
+               new SelectListItem { Text = "13:00 PM", Value = "13:00" },
+               new SelectListItem { Text = "14:00 PM", Value = "14:00" },
+               new SelectListItem { Text = "15:00 PM", Value = "15:00" },
+               new SelectListItem { Text = "16:00 PM", Value = "16:00" },
+               new SelectListItem { Text = "17:00 PM", Value = "17:00" },
+               new SelectListItem { Text = "18:00 PM", Value = "18:00" },
+               new SelectListItem { Text = "19:00 PM", Value = "19:00" },
+               new SelectListItem { Text = "20:00 PM", Value = "20:00" },
+               new SelectListItem { Text = "21:00 PM", Value = "21:00" },
+               new SelectListItem { Text = "22:00 PM", Value = "22:00" }}
+               ,"--Select Time--", new { @class = "form-control", id ="ctime" })
+                @Html.ValidationMessageFor(m => m.ClassTime)
+            </div>
+            <button class="btn gbutton">Update</button>
+        </div>
+    }
+</div>
+
+
+@section scripts{
+ 
+    
+    <script>
+        $("#ctime").change(function () {
+            let classvalue = $("#cvalue").val();
+           
+            let classtime = $("#ctime").val();
+            $.ajax({
+
+                url: '@Url.Action("Checkdateforclass","Trainer")',
+                data: { cvalue: classvalue, ctime: classtime },
+                type: "POST",
+                success: function (values) {
+                    alert(values.message);
+                },
+                error: function (values) {
+                    alert("Hello ");
+                    alert(values.message);
+                    
+                    
+                },
+
+            }
+            )
+        });
+    </script>
+}

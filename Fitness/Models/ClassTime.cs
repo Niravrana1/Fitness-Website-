@@ -16,7 +16,6 @@ namespace Fitness.Models
     {
         public int id { get; set; }
         public Nullable<int> Classid { get; set; }
-        public Nullable<System.DateTime> ClassDate { get; set; }
         public Nullable<System.TimeSpan> ClassTime1 { get; set; }
     
         public virtual Class Class { get; set; }

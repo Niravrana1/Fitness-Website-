@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Fitness.Models.Trainerrate>
+
+@{
+    ViewBag.Title = "Viewprices";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<style>
+    .btn-block {
+        width:15%;
+        border-color: #F23A2E;
+        border-radius: 10px;
+        background-color: #F23A2E;
+    }
+
+        .btn-block:hover {
+            background-color: white;
+            color: #F23A2E;
+            transition: .5s;
+            border-color: #F23A2E;
+        }
+
+</style>
+
+<div class="container pt-1">
+
+    <p>
+        @Html.ActionLink("Create New", "Trainerrate", "trainer", new { @class = "btn btn-primary btn-block" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.trainerid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trainerid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Editrate", "Trainer", new { id = item.Id }, null) |
+
+                    @Html.ActionLink("Delete", "Deleterate", "Trainer", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>

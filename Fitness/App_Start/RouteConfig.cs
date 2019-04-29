@@ -13,6 +13,8 @@ namespace Fitness
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes(); // Attribute route 
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

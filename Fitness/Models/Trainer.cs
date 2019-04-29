@@ -19,7 +19,6 @@ namespace Fitness.Models
         {
             this.Classes = new HashSet<Class>();
             this.NotavailableDatetimes = new HashSet<NotavailableDatetime>();
-            this.ScheduleClasses = new HashSet<ScheduleClass>();
             this.ScheduleTrainers = new HashSet<ScheduleTrainer>();
             this.Trainerrates = new HashSet<Trainerrate>();
         }
@@ -35,14 +34,14 @@ namespace Fitness.Models
         public string City { get; set; }
         public string State { get; set; }
         public Nullable<int> ZipCode { get; set; }
+        public string AboutTrainer { get; set; }
+        public string Picture { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Classes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotavailableDatetime> NotavailableDatetimes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ScheduleClass> ScheduleClasses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ScheduleTrainer> ScheduleTrainers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

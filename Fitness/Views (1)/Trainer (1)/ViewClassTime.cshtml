@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Fitness.Models.Viewmodel.viewclasstimeviewmodel>
+@{
+    ViewBag.Title = "ViewClassTime";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<h2>ViewClassTime</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>Class Name</th>
+        <th>Class Time</th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+    <tr>
+        <td>@i.ClassName</td>
+        <td>@i.ClassTime</td>
+        <td>@Html.ActionLink("Delete", "DeleteClassTime", "Trainer", new { Name = i.ClassName, time = i.ClassTime }, null)</td>
+    </tr>
+     }
+        
+    </table>

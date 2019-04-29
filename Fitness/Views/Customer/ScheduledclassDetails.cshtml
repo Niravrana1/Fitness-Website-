@@ -1,0 +1,66 @@
+﻿@model Fitness.Models.Viewmodel.Scheduleclassviewmodel
+
+@{
+    ViewBag.Title = "ScheduledclassDetails";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+
+<style>
+    .btn-block {
+        border-color: #F23A2E;
+        border-radius: 10px;
+        background-color: #F23A2E;
+    }
+
+        .btn-block:hover {
+            background-color: white;
+            color: #F23A2E;
+            transition: .5s;
+            border-color: #F23A2E;
+        }
+</style>
+
+<div class="container pt-5 ">
+    <div class="justify-content-center shadow p-3 mb-5 bg-white rounded pricediv p-4">
+        <table class="table table-hover" >
+            <tr>
+                <td><strong>Name</strong></td>
+                <td>@ViewBag.Name</td>
+            </tr>
+            <tr>
+                <td><strong>Class Name</strong></td>
+                <td>@ViewBag.ClassName</td>
+            </tr>
+            <tr>
+                <td><strong>Membership Type</strong></td>
+                <td>@ViewBag.Membershiptype</td>
+            </tr>
+            <tr>
+                <td><strong>Trainer</strong></td>
+                <td>@ViewBag.Trainername</td>
+            </tr>
+            <tr>
+                <td><strong>Class start Date</strong></td>
+                <td>@ViewBag.date</td>
+            </tr>
+            <tr>
+                <td><strong>Class Time</strong></td>
+                <td>@ViewBag.time</td>
+            </tr>
+            <tr>
+                <td><strong>Class details</strong></td>
+                <td>@ViewBag.weeks week class session</td>
+            </tr>
+            <tr>
+                <td><strong>Total Amount</strong></td>
+                <td>$@ViewBag.Totaprice<span>.00</span></td>
+            </tr>
+          
+        </table>
+       
+    </div>
+    <div style="width:30%">
+        <a href="~/Customer/Viewscheduledclasses" class="btn btn-primary btn-lg btn-block p-2">Back to List</a>
+    </div>
+</div>
+

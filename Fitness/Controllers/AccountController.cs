@@ -12,10 +12,11 @@ using Fitness.Models;
 using Fitness.Models.Viewmodel;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Security;
+using System.IO;
 
 namespace Fitness.Controllers
 {
-   
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -28,7 +29,7 @@ namespace Fitness.Controllers
             _context = new FitnessEntitiesDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -40,9 +41,9 @@ namespace Fitness.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -111,7 +112,7 @@ namespace Fitness.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Signin(SigninViewmodel model, string returnUrl)
         {
-           var Auser =  _context.AspNetUsers.Where(m => m.UserName == model.UserName).SingleOrDefault();
+            var Auser = _context.AspNetUsers.Where(m => m.UserName == model.UserName).SingleOrDefault();
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -151,7 +152,7 @@ namespace Fitness.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber =model.PhoneNumber };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -177,7 +178,7 @@ namespace Fitness.Controllers
                     _context.SaveChanges();
 
 
-                
+
 
                     // ASPNETUSERROLES require two values(User Id, Role Id)
 
@@ -205,7 +206,7 @@ namespace Fitness.Controllers
             return View(model);
         }
 
-        
+
         [HttpGet]
         [Authorize(Roles = "Admin")] // Only admin can access this methods
         public ActionResult SignupManager()
@@ -214,7 +215,7 @@ namespace Fitness.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SignupManager(Signupviewmodel smv)
         {
@@ -272,7 +273,7 @@ namespace Fitness.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Manager")]
+        [Authorize(Roles = "Manager")]
         public ActionResult SignupTrainer()
         {
             return View();
@@ -281,9 +282,10 @@ namespace Fitness.Controllers
         [HttpPost]
         [Authorize(Roles = "Manager")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SignupTrainer(Signupviewmodel smv)
+        public async Task<ActionResult> SignupTrainer(Signuptrainerviewmodel smv, HttpPostedFileBase uploadFile)
         {
-            if (ModelState.IsValid)
+            if (smv.FirstName != " " && smv.LastName != " " && smv.Email != " " && smv.PhoneNumber != " " && smv.DateOfBirth != null && smv.Aboutyou != " " &&
+                    smv.UserName != " " && smv.StreetAddress != " " && smv.City != " " && smv.State != " ")
             {
                 var user = new ApplicationUser { UserName = smv.UserName, Email = smv.Email, PhoneNumber = smv.PhoneNumber };
                 var result = await UserManager.CreateAsync(user, smv.Password);
@@ -307,6 +309,11 @@ namespace Fitness.Controllers
                     c.City = smv.City;
                     c.State = smv.State;
                     c.ZipCode = smv.ZipCode;
+                    c.AboutTrainer = smv.Aboutyou;
+                    c.Picture = uploadFile.FileName;
+                    var filename = Path.GetFileName(uploadFile.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images/Trainers"), filename);
+                    uploadFile.SaveAs(path);
                     _context.Trainers.Add(c);
                     _context.SaveChanges();
 
@@ -373,7 +380,7 @@ namespace Fitness.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -408,8 +415,8 @@ namespace Fitness.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
