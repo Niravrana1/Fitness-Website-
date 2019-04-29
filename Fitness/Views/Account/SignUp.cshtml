@@ -3,47 +3,108 @@
     ViewBag.Title = "SignUp";
     Layout = "~/Views/Shared/_HomePage.cshtml";
 }
+<style>
 
-<h2>SignUp</h2>
+    .bg-color {
+       background-color : #f8f9fa;
+    }
+    #signUp{
+        margin-left:auto;
+        margin-right:auto;
+   }
+    .input-icon::before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: "\f007";
+        position: absolute;
+        font-size: 22px;
+        left: 20px;
+        padding-top: 35px;
+    }
+    .form-control {
+        padding: .5rem 1.7rem;
+    }
+    .input-password::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f084";
+        position: absolute;
+        font-size: 22px;
+        left: 20px;
+        padding-top: 35px;
+    }
+    #phone-icon::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f095";
+        position: absolute;
+        font-size: 22px;
+        left: 20px;
+        padding-top: 35px;
+    }
+    #email-icon::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0e0";
+        position: absolute;
+        font-size: 22px;
+        left: 20px;
+        padding-top: 35px;
+    }
+    #cal-icon::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f073";
+        position: absolute;
+        font-size: 22px;
+        left: 20px;
+        padding-top: 35px;
+    }
+</style>
 
-<div class="row ">
+<div class="container bg-color mt-3 mb-3 shadow ">
+    <h4 class="text-center text-uppercase font-weight-bolder pt-3">Get your journey started</h4>
     @using (Html.BeginForm("signup", "Account", FormMethod.Post, new { @class = "container pt-1" }))
     {
-        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
             @Html.AntiForgeryToken()
             <hr />
-            <h4>Need style signup page</h4>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group input-icon" >
                 @Html.LabelFor(m => m.FirstName)
-                @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.FirstName, "", new { @class = "form-control"})
                 @Html.ValidationMessageFor(m => m.FirstName)
             </div>
-            <div class="form-group">
+            <div class="form-group input-icon">
                 @Html.LabelFor(m => m.LastName)
-                @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.LastName, "", new { @class = "form-control " })
                 @Html.ValidationMessageFor(m => m.LastName)
             </div>
-            <div class="form-group">
+            <div class="form-group " id="cal-icon">
                 @Html.LabelFor(m => m.DateOfBirth)
                 @Html.TextBoxFor(m => m.DateOfBirth, "", new { @class = "form-control datepicker", placeholder = "MM/DD/YYYY" })
                 @Html.ValidationMessageFor(m => m.DateOfBirth)
             </div>
-            <div class="form-group">
+            <div class="form-group" id="email-icon">
                 @Html.LabelFor(m => m.Email)
                 @Html.TextBoxFor(m => m.Email, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Email)
             </div>
-            <div class="form-group">
+            <div class="form-group" id="phone-icon">
                 @Html.LabelFor(m => m.PhoneNumber)
                 @Html.TextBoxFor(m => m.PhoneNumber, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.PhoneNumber)
             </div>
+               
             <div class="form-group">
                 @Html.LabelFor(m => m.StreetAddress)
                 @Html.TextBoxFor(m => m.StreetAddress, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.StreetAddress)
             </div>
+                 </div>
+        <div class="col-md-6">
+            <hr />
             <div class="form-group">
                 @Html.LabelFor(m => m.City)
                 @Html.TextBoxFor(m => m.City, "", new { @class = "form-control" })
@@ -56,26 +117,26 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.ZipCode)
-                @Html.TextBoxFor(m => m.ZipCode, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.ZipCode, "", new { @class = "form-control"})
                 @Html.ValidationMessageFor(m => m.ZipCode)
             </div>
-            <div class="form-group">
+            <div class="form-group input-icon">
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
-            <div class="form-group">
+            <div class="form-group input-password">
                 @Html.LabelFor(m => m.Password)
-                @Html.TextBoxFor(m => m.Password, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Password, "", new { @class = "form-control" ,type = "password" })
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
-            <div class="form-group">
+            <div class="form-group input-password">
                 @Html.LabelFor(m => m.ConfirmPassword)
-                @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "form-control", type = "password" })
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </div>
-
-            <button type="submit" class="gbutton btn">Sign Up</button>
+            </div>
+            <button type="submit" id="signUp" class="gbutton btn mt-3 mb-3">Sign Up</button>
         </div>
     }
 </div>

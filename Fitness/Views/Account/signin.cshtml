@@ -4,23 +4,63 @@
     Layout = "~/Views/Shared/_HomePage.cshtml";
 }
 
+<style>
 
-    <div class="row ">
-        @using (Html.BeginForm("Signin","Account",FormMethod.Post,new {@class = "container pt-1" }))
+ .bg-img {
+        background-color: #f8f9fa;
+    }
+form{
+        margin-right: auto;
+        margin-left: auto;
+        width: 60%;
+        height: 60%;
+    }
+.form-group{
+    margin-left:auto;
+    margin-right:auto;
+    width:30%;
+}
+.form-control {
+        padding: .5rem 1.7rem;
+    }
+#icon-username::before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: "\f007";
+        position:absolute;
+        font-size: 22px;
+        transform:translateX(30%);
+        padding-top: 35px;
+    }
+    #icon-password::before {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: "\f084";
+        position: absolute;
+        font-size: 22px;
+        transform: translateX(25%);
+        padding-top: 35px;
+    }
+</style>
+
+    <div class=" container bg-img pt-3 mt-5 mb-5 shadow ">
+        @using (Html.BeginForm("Signin","Account",FormMethod.Post,new {@class = "container pt-1 " }))
         {
-        <div class="container-fluid">
+       
+            <div class="col-12 user-img text-center">
+                <div><i class="fas fa-user-circle fa-7x"></i></div>
+            </div>
             @Html.AntiForgeryToken()
-            <h4>Need style SignIn page</h4>
-            <hr />
+            <hr style="width:30%;"/>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
+            <div class="form-group" id = "icon-username" >
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </div>
-            <div class="form-group">
+            <div class="form-group" id="icon-password">
                 @Html.LabelFor(m => m.Password)
-                @Html.TextBoxFor(m => m.Password, "", new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Password, "", new { @class = "form-control", type = "password" })
             </div>
             <div class="form-group">
 
@@ -30,8 +70,12 @@
                 </div>
 
             </div>
-            <button type="submit" class="gbutton btn">LogIn</button>
-        </div>
+
+            <div class="text-center pb-3">
+                <button type="submit" class="gbutton btn">Log In</button>
+                <a href="~/Account/signup" class="Rbutton btn">Register</a>
+            </div>
+        
         }
     </div>
 
