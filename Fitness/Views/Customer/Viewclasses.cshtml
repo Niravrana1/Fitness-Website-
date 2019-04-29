@@ -1,0 +1,161 @@
+﻿@model IEnumerable<Fitness.Models.Class>
+
+@{
+    ViewBag.Title = "Viewclasses";
+    Layout = "~/Views/Shared/_HomePage.cshtml";
+}
+<style>
+    .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .backG {
+        background-color: #f8f9fa;
+    }
+
+    .sessions {
+        margin-top: 48px;
+        margin-bottom: 48px;
+    }
+
+    .symbols {
+        margin-bottom: 20px;
+        height: 56px;
+        width: 56px;
+    }
+
+    .sessions hr {
+        border: 1px solid #F23A2E;
+        width: 10%;
+        margin: 20px 0;
+        content: "";
+    }
+
+    .check-list {
+        float: left;
+        padding: 0;
+    }
+
+        .check-list li {
+            text-decoration: none;
+            display: block;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+    span {
+        color: forestgreen;
+    }
+
+    
+    /*Style fot carousel to take the whole width if the view*/
+    .btn-block {
+        border-color: #F23A2E;
+        border-radius: 10px;
+        background-color: #F23A2E;
+    }
+
+        .btn-block:hover {
+            background-color: white;
+            color: #F23A2E;
+            transition: .5s;
+            border-color: #F23A2E;
+        }
+</style>
+
+<div class="container mt-5 mb-5">
+    <h5 class="text-center text-uppercase">Classes</h5><hr style="border:1px solid #F23A2E; width:10%; background-color:#F23A2E; margin-bottom:3em;" />
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container-fluid">
+                <div class="row no-gutters">
+                    <div class="col-md-6 col-lg-3 backG">
+                        <!--container for yoga section-->
+                        <div class="container sessions pl-4">
+                            <img class="symbols" src="~/Images/padmasana.png" alt="yoga" />
+                            <p class="text-uppercase">Yoga</p><hr />
+                            <p>Find you're inner piece, while gaining flexibility,strenght and improve your circulatory health.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ">
+                        <!--container for weight trraining sec-->
+                        <div class="container sessions pl-4">
+                            <img class="symbols" src="~/Images/man-lifting-weights.png" alt="weights" />
+                            <p class="text-uppercase">Weight Training</p><hr />
+                            <p>Increase muscle mass and strenght, get the body you always dream off. It doesn't matter when you start but if you start.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 backG">
+                        <!--container for weight loss sec-->
+                        <div class="container sessions pl-4">
+                            <img class="symbols" src="~/Images/running.png" />
+                            <p class="text-uppercase">Weight Loss</p><hr />
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugiat iure eveniet perferendis odit est.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <!--container for dancing sec-->
+                        <div class="container sessions p-lg-4">
+                            <img class="symbols" src="~/Images/quaver-outline.png" />
+                            <p class="text-uppercase">Dancing</p><hr />
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugiat iure eveniet perferendis odit est.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <table class="table table-hover">
+                    <tr>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClassName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClassPrice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ClassDiscription)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClassName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClassPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClassDiscription)
+                            </td>
+                            <td>
+                                <a href="~/Customer/Viewscheduledclasses" class="btn btn-primary btn-lg btn-block p-2">Book</a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+       
+    </div>
+</div>
+

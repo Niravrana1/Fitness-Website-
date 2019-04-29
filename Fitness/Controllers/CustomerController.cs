@@ -358,6 +358,12 @@ namespace Fitness.Controllers
 
         }
 
+        public ActionResult Viewclasses()
+        {
+          var classlist =   _Context.Classes.ToList();
+            return View(classlist);
+        }
+
         [HttpGet]
         public ActionResult ScheduleClasssession()
         {

@@ -455,6 +455,7 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Customer\Viewscheduledclasses.cshtml" />
     <Content Include="Views\Customer\ScheduledclassDetails.cshtml" />
+    <Content Include="Views\Customer\Viewclasses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Manager\" />

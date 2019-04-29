@@ -5,81 +5,105 @@
     Layout = "~/Views/Shared/_HomePage.cshtml";
 }
 
-<h2>ScheduleClasssession</h2>
+<style>
+    .mycontent-left {
+        border-right: 1px solid #333;
+    }
+</style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="container mt-5 mb-5">
+    <h5 class="text-center text-uppercase">Book Class</h5><hr style="border:1px solid #F23A2E; width:10%; background-color:#F23A2E; margin-bottom:3em;" />
+    </div>
+<div class="container pt-1 ">
+    <div class="justify-content-center shadow p-3 mb-5 bg-white rounded pricediv p-4 row ">
+        <div class="col-lg-6 span6 mycontent-left">
 
-<div class="form-horizontal">
-    <h4>ScheduleClass</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @using (Html.BeginForm("ScheduleClasssession","Customer",FormMethod.Post, new { @class = "container pt-1" }))
+        {
+            @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.classid, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.classid, (SelectList)ViewBag.Classes, "--Select Class--", new { @class = "form-control", id = "cvalue" })
-            @Html.ValidationMessageFor(model => model.classid, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.classid, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.classid, (SelectList)ViewBag.Classes, "--Select Class--", new { @class = "form-control", id = "cvalue" })
+                        @Html.ValidationMessageFor(model => model.classid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Membershiptype, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Membershiptype, (SelectList)ViewBag.membershiptype, "--Select Membership type--", new { @class = "form-control", id = "mvalue" })
+                        @Html.ValidationMessageFor(model => model.Membershiptype, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ScheduleDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ScheduleDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "MM/DD/YYYY" } })
+                        @Html.ValidationMessageFor(model => model.ScheduleDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ScheduleTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.ScheduleTime,new List<SelectListItem>
+                        {
+                       new SelectListItem{Text="09:00 AM",Value="09:00"},
+
+                        }, "--Select time--", new { @class = "form-control", id="stime" })
+                        @Html.ValidationMessageFor(model => model.ScheduleTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "tprice" } })
+                        @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="gbutton btn">Schedule</button>
+                    </div>
+                </div>
+            </div>
+        
+        }
+    </div>
+        <div class="col-lg-6 span6">
+          
+                <h2>don’t have an account?</h2>
+                <p>My account is the simple, secure and easy way to get online access to your Aspen Dental account, where you can view your upcoming dental work, view billing statements, and make online payments.</p>
+                <a class="btn btn-primary" href="~/Account/SignUp">Sign Up</a>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Membershiptype, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Membershiptype, (SelectList)ViewBag.membershiptype, "--Select Membership type--", new { @class = "form-control", id = "mvalue" })
-            @Html.ValidationMessageFor(model => model.Membershiptype, "", new { @class = "text-danger" })
-        </div>
     </div>
 
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
 
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ScheduleDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ScheduleDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "MM/DD/YYYY" } })
-            @Html.ValidationMessageFor(model => model.ScheduleDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ScheduleTime, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.ScheduleTime,new List<SelectListItem>
-            {
-           new SelectListItem{Text="09:00 AM",Value="09:00"},
-
-            }, "--Select time--", new { @class = "form-control", id="stime" })
-            @Html.ValidationMessageFor(model => model.ScheduleTime, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "tprice" } })
-            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
     </div>
 </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        
 
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 
-@section scripts{
+        @section scripts{
 
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js">
-    </script>
+            <script src="~/Scripts/jquery-ui-1.12.1.min.js">
+            </script>
 
-    <script>
+            <script>
 
         $(".datepicker").datepicker({
             onSelect: function (dateText) {
@@ -138,7 +162,7 @@
                         var validation = $("#mvalue").val() != null && $("#mvalue").val() != "" && $("#cvalue").val() != null && $("#cvalue").val() != "";
                         console.log(validation);
             if (validation) {
-               
+
                 $.ajax({
                     url: "@Url.Action("getclasspricewithmembership", "Customer")",
                     data: { mtype: membership, cname: classval },
@@ -162,6 +186,6 @@
 
 
 
-    </script>
+            </script>
 
-    }
+        }
